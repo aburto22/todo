@@ -1,6 +1,7 @@
 export const dimensions = {
   headerHeight: '4rem',
   footerHeight: '4rem',
+  mobileBreak: '40em',
 };
 
 export const colors = {
@@ -12,4 +13,8 @@ export const colors = {
   gray: '#918B76',
   lightGray: '#C1BDB3',
   green: '#06A77D',
+};
+
+export const boxShadow = {
+  light: '0 3px 10px #0002',
 };
