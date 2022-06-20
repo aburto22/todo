@@ -14,8 +14,6 @@ const List: NextPage = () => {
   const listInfo = useAppSelector((state) => state.user.lists.find((list) => list.id === id));
   const dispatch = useAppDispatch();
 
-  console.log(listInfo);
-
   useEffect(() => {
     if (listInfo) {
       dispatch(setCurrentList(listInfo));
