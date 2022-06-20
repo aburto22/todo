@@ -6,7 +6,8 @@ export const Container = styled.article`
   margin: 0 auto;
 `;
 
-export const Button = styled.button`
+export const Link = styled.a`
+  display: block;
   padding: 1rem 2rem;
   width: 100%;
   transition: all 300ms;

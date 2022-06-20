@@ -15,6 +15,7 @@ const currentListSlice = createSlice({
   name: 'currentList',
   initialState,
   reducers: {
+    setCurrentList: (state, action: PayloadAction<ITodoList>) => action.payload,
     addTodo: (state, action: PayloadAction<IAddTodo>) => {
       const { title, description } = action.payload;
       const newTodo = createTodo(title, description);
@@ -51,4 +52,6 @@ const currentListSlice = createSlice({
 });
 
 export default currentListSlice.reducer;
-export const { addTodo, toggleTodo, removeTodo } = currentListSlice.actions;
+export const {
+  setCurrentList, addTodo, toggleTodo, removeTodo,
+} = currentListSlice.actions;

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ITodoList } from '@localTypes/.';
 import * as styles from './styles';
 
@@ -7,9 +8,11 @@ interface ListPreviewProps {
 
 const ListPreview = ({ list }: ListPreviewProps) => (
   <styles.Container>
-    <styles.Button type="button">
-      <h1>{list.name}</h1>
-    </styles.Button>
+    <Link href={`/lists/${list.id}`} passHref>
+      <styles.Link href="dummy">
+        <h1>{list.name}</h1>
+      </styles.Link>
+    </Link>
   </styles.Container>
 );
 
