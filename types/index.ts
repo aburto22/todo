@@ -9,5 +9,6 @@ export interface ITodo {
 
 export interface ITodoList {
   owner: string;
+  name: string;
   todos: ITodo[];
 }

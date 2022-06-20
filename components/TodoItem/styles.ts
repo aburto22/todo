@@ -3,8 +3,8 @@ import styled from 'styled-components';
 import { H3, SvgButton } from '@styles/common';
 
 export const Todo = styled.article`
-  width: 15rem;
-  height: 20rem;
+  width: 17rem;
+  height: 22rem;
   box-shadow: ${boxShadow.light};
   padding: 1rem;
   word-break: break-word;

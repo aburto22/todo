@@ -4,6 +4,7 @@ import { createTodo } from '@lib/todos';
 
 const initialState: ITodoList = {
   owner: 'me',
+  name: 'any name',
   todos: [],
 };
 
@@ -21,8 +22,32 @@ const currentListSlice = createSlice({
         todos: [...state.todos, newTodo],
       };
     },
+    toggleTodo: (state, action: PayloadAction<string>) => {
+      const updatedTodos = state.todos.map((todo) => {
+        if (todo.id === action.payload) {
+          return {
+            ...todo,
+            done: !todo.done,
+          };
+        }
+        return todo;
+      });
+
+      return {
+        ...state,
+        todos: updatedTodos,
+      };
+    },
+    removeTodo: (state, action: PayloadAction<string>) => {
+      const updatedTodos = state.todos.filter((todo) => todo.id !== action.payload);
+
+      return {
+        ...state,
+        todos: updatedTodos,
+      };
+    },
   },
 });
 
 export default currentListSlice.reducer;
-export const { addTodo } = currentListSlice.actions;
+export const { addTodo, toggleTodo, removeTodo } = currentListSlice.actions;

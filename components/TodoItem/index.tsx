@@ -1,5 +1,7 @@
 import { ITodo } from '@localTypes/.';
 import { formatDate } from '@lib/dates';
+import { useAppDispatch } from '@hooks/redux';
+import { removeTodo, toggleTodo } from '@slices/currentList';
 import * as styles from './styles';
 
 interface TodoItemProps {
@@ -7,15 +9,17 @@ interface TodoItemProps {
 }
 
 const TodoItem = ({ todo }: TodoItemProps) => {
-  const handleDoneClick = () => {
+  const dispatch = useAppDispatch();
 
+  const handleDoneClick = () => {
+    dispatch(toggleTodo(todo.id));
   };
 
   const handleEditClick = () => {
 
   };
   const handleDeleteClick = () => {
-
+    dispatch(removeTodo(todo.id));
   };
 
   return (
