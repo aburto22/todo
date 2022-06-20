@@ -29,7 +29,7 @@ const CreateTodoForm = () => {
 
   return (
     <styles.Form onSubmit={handleSubmit}>
-      <styles.Title>Add a new ToDo</styles.Title>
+      <styles.Title>Add a new Todo</styles.Title>
       <styles.Label htmlFor="title">
         Title:
         <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />

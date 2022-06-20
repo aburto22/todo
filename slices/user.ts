@@ -8,7 +8,7 @@ const initialState: IUser = {
   lists: [],
 };
 
-type IAddList = Omit<ITodoList, 'id' | 'todos' | 'owner'>;
+type IAddList = Omit<ITodoList, 'id' | 'todos' | 'ownerId'>;
 
 const userSlice = createSlice({
   name: 'user',
@@ -16,10 +16,10 @@ const userSlice = createSlice({
   reducers: {
     addList: (state, action: PayloadAction<IAddList>) => {
       const { name } = action.payload;
-      const newList = createList(name, state.name);
+      const newList = createList(name, state.id);
       return {
         ...state,
-        todos: [...state.lists, newList],
+        lists: [...state.lists, newList],
       };
     },
     removeList: (state, action: PayloadAction<string>) => {

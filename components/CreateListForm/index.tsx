@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-// import { useAppDispatch } from '@hooks/redux';
-// import { addList } from '@slices/lists';
+import { useAppDispatch } from '@hooks/redux';
+import { addList } from '@slices/user';
 import * as styles from './styles';
 
 const CreateListForm = () => {
   const [name, setName] = useState('');
-  // const dispatch = useAppDispatch();
+  const dispatch = useAppDispatch();
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -16,8 +16,7 @@ const CreateListForm = () => {
     const newList = {
       name,
     };
-    console.log(newList);
-    // dispatch(addList(newList));
+    dispatch(addList(newList));
     setName('');
   };
 

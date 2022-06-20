@@ -1,8 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as styles from '@styles/home';
-import CreateListForm from '@components/CreateTodoForm';
-import AllLists from '@components/TodoList';
+import CreateListForm from '@components/CreateListForm';
+import AllLists from '@components/AllLists';
 
 const Home: NextPage = () => (
   <>
