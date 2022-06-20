@@ -1,9 +1,11 @@
 import styled from 'styled-components';
-import { dimensions } from '@styles/cssVariables';
+import { dimensions, colors } from '@styles/cssVariables';
 
 export const App = styled.div`
-  background-color: red;
+  background-color: ${colors.white};
   display: grid;
   grid-template-rows: ${dimensions.headerHeight} 1fr ${dimensions.footerHeight};
   min-height: 100vh;
+  color: ${colors.darkGray};
+  font-family: OpenSans, sans-serif;
 `;

@@ -1,8 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
-import { dimensions } from './cssVariables';
+import OpenSansImport from './OpenSans';
 
 const GlobalStyle = createGlobalStyle`
-    * {
+  ${OpenSansImport};
+
+  * {
     margin: 0;
     padding: 0;
     border: 0;
