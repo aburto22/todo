@@ -8,7 +8,14 @@ export interface ITodo {
 }
 
 export interface ITodoList {
-  owner: string;
+  ownerId: string;
   name: string;
   todos: ITodo[];
+  id: string;
+}
+
+export interface IUser {
+  name: string;
+  lists: ITodoList[];
+  id: string;
 }

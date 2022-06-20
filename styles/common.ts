@@ -1,15 +1,15 @@
 import styled from 'styled-components';
 import { colors } from './cssVariables';
 
-export const H1 = styled.h1`
+export const BaseH1 = styled.h1`
 
 `;
 
-export const H2 = styled.h2`
+export const BaseH2 = styled.h2`
   font-size: 1.5rem;
 `;
 
-export const H3 = styled.h3`
+export const BaseH3 = styled.h3`
   font-size: 1.2rem;
 `;
 
@@ -17,7 +17,7 @@ interface ButtonProps {
   styleType?: 'primary';
 }
 
-export const Button = styled.button<ButtonProps>`
+export const BaseButton = styled.button<ButtonProps>`
   padding: 0.7rem 1.5rem;
   border: 2px solid ${colors.blue};
   transition: transform 300ms;
@@ -41,7 +41,7 @@ export const Button = styled.button<ButtonProps>`
   }
 `;
 
-export const SvgButton = styled.button`
+export const BaseSvgButton = styled.button`
   padding: 0.3rem;
   transition: transform 300ms;
   border-radius: 0.3rem;
@@ -57,4 +57,30 @@ export const SvgButton = styled.button`
   :hover {
     color: ${colors.blue};
   }
+`;
+
+export const BaseLabel = styled.label`
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+  font-weight: 600;
+  gap: 0.3rem;
+`;
+
+export const BaseInput = styled.input`
+  border: 1px solid ${colors.lightGray};
+  padding: 0.3rem 0.5rem;
+  border-radius: 0.2rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+`;
+
+export const BaseTextarea = styled.textarea`
+  border: 1px solid ${colors.lightGray};
+  padding: 0.5rem;
+  border-radius: 0.2rem;
+  font-weight: normal;
+  height: 5rem;
+  font-size: 0.9rem;
+  line-height: 1.1rem;
 `;

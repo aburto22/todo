@@ -1,6 +1,6 @@
 import { boxShadow, colors } from '@styles/cssVariables';
 import styled from 'styled-components';
-import { H3, SvgButton } from '@styles/common';
+import { BaseH3, BaseSvgButton } from '@styles/common';
 
 export const Todo = styled.article`
   width: 17rem;
@@ -17,7 +17,7 @@ export const Todo = styled.article`
   }
 `;
 
-export const Title = styled(H3)`
+export const Title = styled(BaseH3)`
   margin-bottom: 1rem;
   color: ${colors.black};
   max-height: 15rem;
@@ -48,14 +48,14 @@ export const ButtonContainer = styled.div`
   margin-left: auto;
 `;
 
-export const DoneButton = styled(SvgButton)`
+export const DoneButton = styled(BaseSvgButton)`
 
 `;
 
-export const EditButton = styled(SvgButton)`
+export const EditButton = styled(BaseSvgButton)`
 
 `;
 
-export const DeleteButton = styled(SvgButton)`
+export const DeleteButton = styled(BaseSvgButton)`
 
 `;

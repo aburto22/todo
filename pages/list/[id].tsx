@@ -1,25 +1,25 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as styles from '@styles/home';
-import CreateListForm from '@components/CreateTodoForm';
-import AllLists from '@components/TodoList';
+import CreateTodoForm from '@components/CreateTodoForm';
+import TodoList from '@components/TodoList';
 
-const Home: NextPage = () => (
+const List: NextPage = () => (
   <>
     <Head>
-      <title>More than a ToDo list</title>
+      <title>My list</title>
       <meta name="description" content="A powerful todo list for all your needs" />
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <styles.Main>
       <styles.Section>
-        <CreateListForm />
+        <CreateTodoForm />
       </styles.Section>
       <styles.Section>
-        <AllLists />
+        <TodoList />
       </styles.Section>
     </styles.Main>
   </>
 );
 
-export default Home;
+export default List;

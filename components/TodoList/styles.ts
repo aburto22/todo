@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { H2 } from '@styles/common';
+import { BaseH2 } from '@styles/common';
 
-export const Subheading = styled(H2)`
+export const Subheading = styled(BaseH2)`
   text-align: center;
   margin-bottom: 1rem;
   padding: 0 1rem;

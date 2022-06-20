@@ -3,9 +3,10 @@ import type { ITodo, ITodoList } from '@localTypes/.';
 import { createTodo } from '@lib/todos';
 
 const initialState: ITodoList = {
-  owner: 'me',
+  ownerId: 'random id',
   name: 'any name',
   todos: [],
+  id: '',
 };
 
 type IAddTodo = Omit<ITodo, 'createdAt' | 'updatedAt' | 'done' | 'id'>;
