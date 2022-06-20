@@ -14,7 +14,7 @@ export const H3 = styled.h3`
 `;
 
 interface ButtonProps {
-  styleType: 'primary' | 'secondary';
+  styleType?: 'primary';
 }
 
 export const Button = styled.button<ButtonProps>`
@@ -38,5 +38,23 @@ export const Button = styled.button<ButtonProps>`
 
   :hover {
     transform: scale(1.08);
+  }
+`;
+
+export const SvgButton = styled.button`
+  padding: 0.3rem;
+  transition: transform 300ms;
+  border-radius: 0.3rem;
+  display: block;
+  width: 2rem;
+  height: 2rem;
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+
+  :hover {
+    color: ${colors.blue};
   }
 `;
