@@ -5,11 +5,12 @@ import { H2, Button } from '@styles/common';
 export const Form = styled.form`
   max-width: 35rem;
   margin: 0 auto;
-  box-shadow: ${boxShadow.light};
+  box-shadow: ${boxShadow.insetMobile};
   padding: 1rem;
 
   @media (min-width: ${dimensions.mobileBreak}) {
     padding: 2rem;
+  box-shadow: ${boxShadow.inset};
   }
 `;
 

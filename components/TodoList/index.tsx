@@ -28,9 +28,9 @@ const TodoList = () => {
             <styles.Subheading>Completed</styles.Subheading>
           </styles.SubheadingItem>
           {doneTodos.map((todo) => (
-            <li key={todo.id}>
+            <styles.TodoItem key={todo.id}>
               <TodoItem todo={todo} />
-            </li>
+            </styles.TodoItem>
           ))}
         </>
       )}

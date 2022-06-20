@@ -4,6 +4,8 @@ import { H2 } from '@styles/common';
 export const List = styled.ul`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
 `;
 
 export const SubheadingItem = styled.li`

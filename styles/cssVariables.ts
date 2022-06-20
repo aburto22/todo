@@ -17,4 +17,6 @@ export const colors = {
 
 export const boxShadow = {
   light: '0 3px 10px #0002',
+  insetMobile: 'inset 0 3px 10px #0002, inset -2px -3px 10px #0001',
+  inset: 'inset 0 3px 10px #0002, inset -2px -3px 10px #0001',
 };

@@ -4,8 +4,8 @@ import type { ITodo } from '@localTypes/.';
 export const createTodo = (title: string, description: string): ITodo => ({
   title,
   description,
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  createdAt: Date(),
+  updatedAt: Date(),
   done: false,
   id: uuidv4(),
 });

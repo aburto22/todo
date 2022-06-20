@@ -2,8 +2,8 @@ export interface ITodo {
   title: string;
   description: string;
   done: boolean;
-  createdAt: Date;
-  updatedAt: Date;
+  createdAt: string;
+  updatedAt: string;
   id: string;
 }
 
