@@ -2,6 +2,7 @@ import type { NextPage } from 'next';
 import Head from 'next/head';
 import * as styles from '@styles/home';
 import CreateTodoForm from '@components/CreateTodoForm';
+import TodoList from '@components/TodoList';
 
 const Home: NextPage = () => (
   <>
@@ -11,7 +12,12 @@ const Home: NextPage = () => (
       <link rel="icon" href="/favicon.ico" />
     </Head>
     <styles.Main>
-      <CreateTodoForm />
+      <styles.Section>
+        <CreateTodoForm />
+      </styles.Section>
+      <styles.Section>
+        <TodoList />
+      </styles.Section>
     </styles.Main>
   </>
 );

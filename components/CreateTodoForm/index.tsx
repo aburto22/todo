@@ -28,20 +28,18 @@ const CreateTodoForm = () => {
   };
 
   return (
-    <styles.Section>
-      <styles.Form onSubmit={handleSubmit}>
-        <styles.Title>Add a new ToDo</styles.Title>
-        <styles.Label htmlFor="title">
-          Title:
-          <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
-        </styles.Label>
-        <styles.Label htmlFor="description">
-          Description:
-          <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
-        </styles.Label>
-        <styles.SubmitButton type="submit" styleType="primary">Add</styles.SubmitButton>
-      </styles.Form>
-    </styles.Section>
+    <styles.Form onSubmit={handleSubmit}>
+      <styles.Title>Add a new ToDo</styles.Title>
+      <styles.Label htmlFor="title">
+        Title:
+        <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
+      </styles.Label>
+      <styles.Label htmlFor="description">
+        Description:
+        <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
+      </styles.Label>
+      <styles.SubmitButton type="submit" styleType="primary">Add</styles.SubmitButton>
+    </styles.Form>
   );
 };
 

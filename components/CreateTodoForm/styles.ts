@@ -2,14 +2,6 @@ import styled from 'styled-components';
 import { colors, dimensions, boxShadow } from '@styles/cssVariables';
 import { H2, Button } from '@styles/common';
 
-export const Section = styled.section`
-  padding: 0.5rem;
-
-  @media (min-width: ${dimensions.mobileBreak}){
-    padding: 1rem;
-  }
-`;
-
 export const Form = styled.form`
   max-width: 35rem;
   margin: 0 auto;
