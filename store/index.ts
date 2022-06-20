@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import currentList from '@slices/currentList';
 
 const store = configureStore({
-  reducer: {},
+  reducer: {
+    currentList,
+  },
 });
 
 export default store;

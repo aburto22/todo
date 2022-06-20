@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
+import { useAppDispatch } from '@hooks/redux';
+import { addTodo } from '@slices/currentList';
 import * as styles from './styles';
 
 const CreateTodoForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const dispatch = useAppDispatch();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -15,6 +18,13 @@ const CreateTodoForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const newTodo = {
+      title,
+      description,
+    };
+    dispatch(addTodo(newTodo));
+    setTitle('');
+    setDescription('');
   };
 
   return (
@@ -23,7 +33,7 @@ const CreateTodoForm = () => {
         <styles.Title>Add a new ToDo</styles.Title>
         <styles.Label htmlFor="title">
           Title:
-          <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} />
+          <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
         </styles.Label>
         <styles.Label htmlFor="description">
           Description:
