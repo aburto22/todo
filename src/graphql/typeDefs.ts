@@ -5,10 +5,16 @@ const typeDefs = gql`
     _id: ID
     email: String
     name: String
+    createdAt: String
+    id: String
   }
 
   type Query {
-    getOrCreateUser(email: String!, name: String!): User
+    getUserByEmail(email: String!): User
+  }
+
+  type Mutation {
+    createUser(email: String!, name: String!): User!
   }
 `;
 
