@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useList } from '@hooks/swr';
-import { createTodoFetcher } from '@lib/fetchers';
+import { createTodoFetcher } from '@lib/todoFetchers';
 import * as styles from './styles';
 
 const CreateTodoForm = () => {

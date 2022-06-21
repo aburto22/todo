@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useUserLists } from '@hooks/swr';
 import { useUser } from '@auth0/nextjs-auth0';
-import { createListFetcher } from '@lib/fetchers';
+import { createListFetcher } from '@lib/listFetchers';
 import * as styles from './styles';
 
 const CreateListForm = () => {

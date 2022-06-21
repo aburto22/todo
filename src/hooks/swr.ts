@@ -1,5 +1,6 @@
 import useSWR from 'swr';
-import { getUserFetcher, getUserListsFetcher, getListFetcher } from '@lib/fetchers';
+import { getUserFetcher } from '@lib/userFetchers';
+import { getUserListsFetcher, getListFetcher } from '@lib/listFetchers';
 
 export const useUser = (email: string) => {
   const { data, error, mutate } = useSWR(email, getUserFetcher);
