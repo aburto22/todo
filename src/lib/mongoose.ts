@@ -39,3 +39,5 @@ const dbConnect = async () => {
 
   return cached.conn;
 };
+
+export default dbConnect;

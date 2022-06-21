@@ -20,6 +20,7 @@
       "@hooks/*": ["hooks/*"],
       "@components/*": ["components/*"],
       "@lib/*": ["lib/*"],
+      "@models/*": ["models/*"],
       "@store/*": ["store/*"],
       "@slices/*": ["slices/*"],
       "@localTypes/*": ["types/*"],
