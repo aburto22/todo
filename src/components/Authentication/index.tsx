@@ -8,8 +8,6 @@ interface AuthenticationProps {
 const Authentication = ({ children }: AuthenticationProps) => {
   const { user, isLoading, error } = useUser();
 
-  console.log(user);
-
   if (isLoading) {
     return <p>Loading...</p>;
   }
