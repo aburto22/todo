@@ -29,6 +29,7 @@ module.exports = {
       unnamedComponents: 'arrow-function',
     }],
     'import/prefer-default-export': 0,
+    'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
   ignorePatterns: ['next.config.js', '.eslintrc.js'],
 };

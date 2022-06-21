@@ -19,7 +19,7 @@ const listSchema = new mongoose.Schema({
     default: false,
   },
   todos: {
-    type: [mongoose.Schema.Types.ObjectId],
+    type: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Todo' }],
   },
 });
 

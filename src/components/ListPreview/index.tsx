@@ -8,9 +8,9 @@ interface ListPreviewProps {
 
 const ListPreview = ({ list }: ListPreviewProps) => (
   <styles.Container>
-    <Link href={`/lists/${list.id}`} passHref>
+    <Link href={`/lists/${list._id}`} passHref>
       <styles.Link href="dummy">
-        <h1>{list.name}</h1>
+        <h2>{list.name}</h2>
       </styles.Link>
     </Link>
   </styles.Container>

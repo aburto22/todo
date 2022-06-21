@@ -5,7 +5,6 @@ import MessageScreen from '@components/MessageScreen';
 import * as styles from './styles';
 
 const AllLists = () => {
-  // const lists = useAppSelector((state) => state.user.lists);
   const { user } = useUser();
   const { lists } = useUserLists(user?.sub || '');
 

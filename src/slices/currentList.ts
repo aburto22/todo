@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { ITodo, ITodoList } from '@localTypes/.';
-import { createTodo } from '@lib/todos';
 
 const initialState: ITodoList = {
   ownerId: 'random id',
@@ -18,7 +17,7 @@ const currentListSlice = createSlice({
     setCurrentList: (state, action: PayloadAction<ITodoList>) => action.payload,
     addTodo: (state, action: PayloadAction<IAddTodo>) => {
       const { title, description } = action.payload;
-      const newTodo = createTodo(title, description);
+      const newTodo = {};
       return {
         ...state,
         todos: [...state.todos, newTodo],

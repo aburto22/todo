@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '@hooks/redux';
-import { addTodo } from '@slices/currentList';
+import { useRouter } from 'next/router';
+import { useList } from '@hooks/swr';
+import { createTodoFetcher } from '@lib/fetchers';
 import * as styles from './styles';
 
 const CreateTodoForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const dispatch = useAppDispatch();
+  const router = useRouter();
+  const { id } = router.query;
+  const listId = id?.toString() || '';
+  const { mutate } = useList(listId);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -18,11 +22,7 @@ const CreateTodoForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newTodo = {
-      title,
-      description,
-    };
-    dispatch(addTodo(newTodo));
+    mutate(async () => createTodoFetcher(title, description, listId));
     setTitle('');
     setDescription('');
   };

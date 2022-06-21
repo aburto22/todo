@@ -37,6 +37,31 @@ export const createUserFetcher = async (email: string, name: string): Promise<IU
   return res.createUser;
 };
 
+export const getListFetcher = async (listId: string): Promise<ITodoList | null> => {
+  const query = gql`
+    query {
+      getListById(listId: "${listId}") {
+        name
+        id
+        _id
+        ownerId
+        isFreezed
+        todos {
+          title
+          description
+          done
+          createdAt
+          updatedAt
+          _id
+        }
+      }
+    }
+`;
+
+  const res = await fetcher(query);
+  return res.getListById;
+};
+
 export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]> => {
   const query = gql`
     query {
@@ -63,10 +88,47 @@ export const createListFetcher = async (name: string, ownerId: string): Promise<
         _id
         ownerId
         isFreezed
+        todos {
+          _id
+          title
+          description
+          done
+          createdAt
+          updatedAt
+        }
       }
     }
   `;
 
   const res = await fetcher(query);
   return res.createList;
+};
+
+export const createTodoFetcher = async (
+  title: string,
+  description: string,
+  listId: string,
+): Promise<ITodoList> => {
+  const query = gql`
+    mutation {
+      createTodo(title: "${title}", description: "${description}", listId: "${listId}") {
+        name
+        id
+        _id
+        ownerId
+        isFreezed
+        todos {
+          _id
+          title
+          description
+          done
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  `;
+
+  const res = await fetcher(query);
+  return res.createTodo;
 };

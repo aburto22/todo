@@ -1,11 +1,23 @@
-import { v4 as uuidv4 } from 'uuid';
-import type { ITodo } from '@localTypes/.';
+import Todo from '@models/todo';
+import List from '@models/list';
+import dbConnect from './mongoose';
 
-export const createTodo = (title: string, description: string): ITodo => ({
-  title,
-  description,
-  createdAt: Date(),
-  updatedAt: Date(),
-  done: false,
-  id: uuidv4(),
-});
+export const createTodo = async (title: string, description: string, listId: string) => {
+  await dbConnect();
+
+  const newTodo = new Todo({
+    title,
+    description,
+    createdAt: new Date(),
+    updatedAt: new Date(),
+    done: false,
+  });
+
+  await newTodo.save();
+
+  const list = await List.findById(listId).exec();
+
+  list.todos = [...list.todos, newTodo._id];
+
+  return list.save();
+};

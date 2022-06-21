@@ -10,7 +10,7 @@ export const getUserLists = async (ownerId: string): Promise<ITodoList[]> => {
 
 export const getListById = async (listId: string): Promise<ITodoList> => {
   await dbConnect();
-  return List.findById(listId).exec();
+  return List.findById(listId).populate('todos').exec();
 };
 
 export const createList = async (name: string, ownerId: string): Promise<ITodoList> => {

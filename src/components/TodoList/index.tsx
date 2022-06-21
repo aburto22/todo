@@ -1,12 +1,20 @@
-import { useAppSelector } from '@hooks/redux';
 import TodoItem from '@components/TodoItem';
+import { useRouter } from 'next/router';
+import { useList } from '@hooks/swr';
 import * as styles from './styles';
 
 const TodoList = () => {
-  const todos = useAppSelector((state) => state.currentList.todos);
+  const router = useRouter();
+  const { id } = router.query;
+  const listId = id?.toString() || '';
+  const { list } = useList(listId);
 
-  const doneTodos = todos.filter((todo) => todo.done);
-  const pendingTodos = todos.filter((todo) => !todo.done);
+  if (!list) {
+    return null;
+  }
+
+  const doneTodos = list.todos.filter((todo) => todo.done);
+  const pendingTodos = list.todos.filter((todo) => !todo.done);
 
   return (
     <>
@@ -15,7 +23,7 @@ const TodoList = () => {
           <styles.Subheading>Pending</styles.Subheading>
           <styles.List>
             {pendingTodos.map((todo) => (
-              <li key={todo.id}>
+              <li key={todo.toString()}>
                 <TodoItem todo={todo} />
               </li>
             ))}
@@ -27,7 +35,7 @@ const TodoList = () => {
           <styles.Subheading>Completed</styles.Subheading>
           <styles.List>
             {doneTodos.map((todo) => (
-              <li key={todo.id}>
+              <li key={todo.toString()}>
                 <TodoItem todo={todo} />
               </li>
             ))}
