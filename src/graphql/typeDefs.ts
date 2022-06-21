@@ -10,7 +10,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getUserByEmail(email: String!): User
+    getUserByEmail(email: String): User
   }
 
   type Mutation {
