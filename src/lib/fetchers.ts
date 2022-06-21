@@ -17,7 +17,6 @@ export const getUserFetcher = async (email: string): Promise<IUserDb | null> => 
 `;
 
   const res = await fetcher(query);
-  console.log(res);
   return res.getUserByEmail;
 };
 
@@ -35,6 +34,5 @@ export const createUserFetcher = async (email: string, name: string): Promise<IU
   `;
 
   const res = await fetcher(query);
-  console.log(res);
   return res.createUser;
 };

@@ -9,11 +9,7 @@ interface AuthenticationProps {
 
 const Authentication = ({ children }: AuthenticationProps) => {
   const { user, isLoading, error } = useUser();
-  const {
-    user: userSwr, isLoading: isLoadingSwr, error: errorSwr, mutate,
-  } = useUserSwr(user?.email || '');
-
-  console.log(userSwr, isLoadingSwr, errorSwr);
+  const { user: userSwr, mutate } = useUserSwr(user?.email || '');
 
   if (isLoading) {
     return <p>Loading...</p>;
@@ -27,11 +23,8 @@ const Authentication = ({ children }: AuthenticationProps) => {
     return <p>Log-in to start creating lists!</p>;
   }
 
-  if (!isLoadingSwr && !userSwr && !errorSwr) {
-    const email = user.email || '';
-    const name = user.name || '';
-    console.log('creating user');
-    mutate(createUserFetcher(email, name));
+  if (userSwr === null) {
+    mutate(createUserFetcher(user.email || '', user.name || ''));
   }
 
   return <>{children}</>;
