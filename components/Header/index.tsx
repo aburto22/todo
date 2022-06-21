@@ -11,6 +11,8 @@ const Header = () => (
           </a>
         </Link>
       </styles.Title>
+      <a href="/api/auth/login">Login</a>
+      <a href="/api/auth/logout">Logout</a>
     </styles.Nav>
   </styles.Header>
 );
