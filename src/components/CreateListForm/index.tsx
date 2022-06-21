@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { useAppDispatch } from '@hooks/redux';
-import { addList } from '@slices/user';
+import { useUserLists } from '@hooks/swr';
+import { useUser } from '@auth0/nextjs-auth0';
+import { createListFetcher } from '@lib/fetchers';
 import * as styles from './styles';
 
 const CreateListForm = () => {
   const [name, setName] = useState('');
-  const dispatch = useAppDispatch();
+  const { user } = useUser();
+  const userId = user?.sub || '';
+  const { mutate } = useUserLists(userId);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -13,10 +16,14 @@ const CreateListForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newList = {
-      name,
-    };
-    dispatch(addList(newList));
+    mutate(async (lists) => {
+      const newList = await createListFetcher(name, userId);
+
+      if (lists) {
+        return [...lists, newList];
+      }
+      return [newList];
+    });
     setName('');
   };
 

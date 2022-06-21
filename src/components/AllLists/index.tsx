@@ -1,6 +1,7 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import ListPreview from '@components/ListPreview';
 import { useUserLists } from '@hooks/swr';
+import MessageScreen from '@components/MessageScreen';
 import * as styles from './styles';
 
 const AllLists = () => {
@@ -10,6 +11,10 @@ const AllLists = () => {
 
   if (!lists) {
     return null;
+  }
+
+  if (lists.length === 0) {
+    return <MessageScreen message="Create your first list" />;
   }
 
   return (

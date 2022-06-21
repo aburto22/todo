@@ -53,3 +53,20 @@ export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]>
   const res = await fetcher(query);
   return res.getUserLists;
 };
+
+export const createListFetcher = async (name: string, ownerId: string): Promise<ITodoList> => {
+  const query = gql`
+    mutation {
+      createList(name: "${name}", ownerId: "${ownerId}") {
+        name
+        id
+        _id
+        ownerId
+        isFreezed
+      }
+    }
+  `;
+
+  const res = await fetcher(query);
+  return res.createList;
+};
