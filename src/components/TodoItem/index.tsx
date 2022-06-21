@@ -1,12 +1,16 @@
-import { ITodo } from '@localTypes/client';
+import { ITodo, ITodoList } from '@localTypes/client';
 import { formatDate } from '@lib/dates';
+import { deleteTodoFetcher } from '@lib/todoFetchers';
+import type { KeyedMutator } from 'swr';
 import * as styles from './styles';
 
 interface TodoItemProps {
-  todo: ITodo
+  todo: ITodo;
+  mutate: KeyedMutator<ITodoList | null>;
+  list: ITodoList;
 }
 
-const TodoItem = ({ todo }: TodoItemProps) => {
+const TodoItem = ({ todo, mutate, list }: TodoItemProps) => {
   const handleDoneClick = () => {
 
   };
@@ -15,8 +19,18 @@ const TodoItem = ({ todo }: TodoItemProps) => {
 
   };
 
-  const handleDeleteClick = () => {
+  const handleDeleteClick = async () => {
+    const optimisticData = {
+      ...list,
+      todos: list.todos.filter((t) => t._id !== todo._id),
+    };
 
+    const options = {
+      optimisticData,
+      rollbackOnError: true,
+    };
+
+    mutate(deleteTodoFetcher(todo._id, list._id), options);
   };
 
   return (

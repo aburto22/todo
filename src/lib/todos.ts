@@ -24,7 +24,9 @@ export const createTodo = async (title: string, description: string, listId: str
 
   list.todos = [...list.todos, newTodo._id];
 
-  return list.save();
+  await list.save();
+
+  return List.findById<ITodoListDb>(listId).populate('todos').exec();
 };
 
 export const deleteTodo = async (todoId: string, listId: string) => {
@@ -36,7 +38,11 @@ export const deleteTodo = async (todoId: string, listId: string) => {
     throw new Error('list not found');
   }
 
-  list.todos = list.todos.filter((todo) => todo.valueOf() === todoId);
+  list.todos = list.todos.filter((todo) => todo.valueOf() !== todoId);
 
-  return list.save();
+  await list.save();
+
+  await Todo.findByIdAndDelete(todoId).exec();
+
+  return List.findById<ITodoListDb>(listId).populate('todos').exec();
 };

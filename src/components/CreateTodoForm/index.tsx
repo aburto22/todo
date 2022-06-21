@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { useList } from '@hooks/swr';
 import { createTodoFetcher } from '@lib/todoFetchers';
+import type { ITodoList } from '@localTypes/client';
+import type { KeyedMutator } from 'swr';
 import * as styles from './styles';
 
-const CreateTodoForm = () => {
+interface TodoListProps {
+  listId: string;
+  mutate: KeyedMutator<ITodoList | null>;
+}
+
+const CreateTodoForm = ({ listId, mutate }: TodoListProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const router = useRouter();
-  const { id } = router.query;
-  const listId = id?.toString() || '';
-  const { mutate } = useList(listId);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);

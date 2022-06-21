@@ -1,30 +1,26 @@
 import TodoItem from '@components/TodoItem';
-import { useRouter } from 'next/router';
-import { useList } from '@hooks/swr';
+import type { ITodoList } from '@localTypes/client';
+import type { KeyedMutator } from 'swr';
 import * as styles from './styles';
 
-const TodoList = () => {
-  const router = useRouter();
-  const { id } = router.query;
-  const listId = id?.toString() || '';
-  const { list } = useList(listId);
+interface TodoListProps {
+  mutate: KeyedMutator<ITodoList | null>;
+  list: ITodoList;
+}
 
-  if (!list) {
-    return null;
-  }
-
+const TodoList = ({ list, mutate }: TodoListProps) => {
   const doneTodos = list.todos.filter((todo) => todo.done);
   const pendingTodos = list.todos.filter((todo) => !todo.done);
 
   return (
     <>
-      {pendingTodos.length > 0 && (
+      {list.todos.length > 0 && (
         <>
           <styles.Subheading>Pending</styles.Subheading>
           <styles.List>
             {pendingTodos.map((todo) => (
               <li key={todo._id}>
-                <TodoItem todo={todo} />
+                <TodoItem todo={todo} mutate={mutate} list={list} />
               </li>
             ))}
           </styles.List>
@@ -36,7 +32,7 @@ const TodoList = () => {
           <styles.List>
             {doneTodos.map((todo) => (
               <li key={todo._id}>
-                <TodoItem todo={todo} />
+                <TodoItem todo={todo} mutate={mutate} list={list} />
               </li>
             ))}
           </styles.List>

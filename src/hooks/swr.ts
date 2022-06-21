@@ -7,7 +7,6 @@ export const useUser = (email: string) => {
 
   return {
     user: data,
-    isLoading: data === undefined && !error,
     error,
     mutate,
   };
@@ -18,7 +17,6 @@ export const useList = (listId: string) => {
 
   return {
     list: data,
-    isLoading: data === undefined && !error,
     error,
     mutate,
   };
@@ -29,7 +27,6 @@ export const useUserLists = (ownerId: string) => {
 
   return {
     lists: data,
-    isLoading: data === undefined && !error,
     error,
     mutate,
   };

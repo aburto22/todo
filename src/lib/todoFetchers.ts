@@ -30,3 +30,31 @@ export const createTodoFetcher = async (
   const res = await fetcher(query);
   return res.createTodo;
 };
+
+export const deleteTodoFetcher = async (
+  todoId: string,
+  listId: string,
+): Promise<ITodoList> => {
+  const query = gql`
+    mutation {
+      deleteTodo(todoId: "${todoId}", listId: "${listId}") {
+        name
+        id
+        _id
+        ownerId
+        isFreezed
+        todos {
+          _id
+          title
+          description
+          done
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  `;
+
+  const res = await fetcher(query);
+  return res.deleteTodo;
+};
