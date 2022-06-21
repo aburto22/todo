@@ -4,8 +4,8 @@ import { getUserLists, getListById, createList } from '@lib/lists';
 const resolvers = {
   Query: {
     getUserByEmail: async (parent: any, { email }: { email: string }) => getUserByEmail(email),
-    getUserLists: async (parent: any, ownerId: string) => getUserLists(ownerId),
-    getListById: async (parent: any, listId: string) => getListById(listId),
+    getUserLists: async (parent: any, { ownerId }: { ownerId: string }) => getUserLists(ownerId),
+    getListById: async (parent: any, { listId }: { listId: string }) => getListById(listId),
   },
   Mutation: {
     createUser: async (

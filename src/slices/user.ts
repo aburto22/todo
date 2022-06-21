@@ -16,7 +16,7 @@ const userSlice = createSlice({
   reducers: {
     addList: (state, action: PayloadAction<IAddList>) => {
       const { name } = action.payload;
-      const newList = createList(name, state.id);
+      const newList = {};
       return {
         ...state,
         lists: [...state.lists, newList],

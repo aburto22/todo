@@ -24,6 +24,7 @@ const typeDefs = gql`
     ownerId: String
     id: String
     todos: [Todo]
+    isFreezed: Boolean
   }
 
   type Query {
