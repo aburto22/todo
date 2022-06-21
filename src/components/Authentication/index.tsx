@@ -1,7 +1,8 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useUser } from '@auth0/nextjs-auth0';
-import { useUser as useUserSwr } from '@hooks/swr';
-import { createUserFetcher } from '@lib/fetchers';
+// import { useUser as useUserSwr } from '@hooks/swr';
+// import { createUserFetcher } from '@lib/fetchers';
+import MessageScreen from '@components/MessageScreen';
 
 interface AuthenticationProps {
   children: React.ReactNode;
@@ -9,23 +10,25 @@ interface AuthenticationProps {
 
 const Authentication = ({ children }: AuthenticationProps) => {
   const { user, isLoading, error } = useUser();
-  const { user: userSwr, mutate } = useUserSwr(user?.email || '');
+  // const { user: userSwr, mutate } = useUserSwr(user?.email || '');
+
+  // console.log(user);
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <MessageScreen message="loading..." />;
   }
 
   if (error) {
-    return <p>There was an error, try again!</p>;
+    return <MessageScreen message="There was an error, try again!" />;
   }
 
   if (!user) {
-    return <p>Log-in to start creating lists!</p>;
+    return <MessageScreen message="Log-in to start using the app!" />;
   }
 
-  if (userSwr === null) {
-    mutate(createUserFetcher(user.email || '', user.name || ''));
-  }
+  // if (userSwr === null) {
+  //   mutate(createUserFetcher(user.email || '', user.name || ''));
+  // }
 
   return <>{children}</>;
 };

@@ -1,5 +1,5 @@
 import { request, gql } from 'graphql-request';
-import { IUserDb } from '@localTypes/.';
+import { IUserDb, ITodoList } from '@localTypes/.';
 
 const fetcher = async <T = any>(query: string): Promise<T> => request('/api/graphql', gql`${query}`);
 
@@ -35,4 +35,21 @@ export const createUserFetcher = async (email: string, name: string): Promise<IU
 
   const res = await fetcher(query);
   return res.createUser;
+};
+
+export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]> => {
+  const query = gql`
+    query {
+      getUserLists(ownerId: "${ownerId}") {
+        name
+        id
+        _id
+        ownerId
+        isFreezed
+      }
+    }
+`;
+
+  const res = await fetcher(query);
+  return res.getUserLists;
 };

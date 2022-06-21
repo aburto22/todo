@@ -12,8 +12,10 @@ export interface ITodo {
 export interface ITodoList {
   ownerId: string;
   name: string;
-  todos: ITodo[];
+  todos: Types.ObjectId[];
   id: string;
+  _id: Types.ObjectId;
+  isFreezed: boolean;
 }
 
 export interface IUser {
