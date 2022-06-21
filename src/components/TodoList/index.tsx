@@ -23,7 +23,7 @@ const TodoList = () => {
           <styles.Subheading>Pending</styles.Subheading>
           <styles.List>
             {pendingTodos.map((todo) => (
-              <li key={todo.toString()}>
+              <li key={todo._id}>
                 <TodoItem todo={todo} />
               </li>
             ))}
@@ -35,7 +35,7 @@ const TodoList = () => {
           <styles.Subheading>Completed</styles.Subheading>
           <styles.List>
             {doneTodos.map((todo) => (
-              <li key={todo.toString()}>
+              <li key={todo._id}>
                 <TodoItem todo={todo} />
               </li>
             ))}

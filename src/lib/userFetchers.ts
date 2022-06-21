@@ -1,8 +1,8 @@
 import { gql } from 'graphql-request';
 import fetcher from '@lib/fetcher';
-import { IUserDb } from '@localTypes/.';
+import { IUser } from '@localTypes/client';
 
-export const getUserFetcher = async (email: string): Promise<IUserDb | null> => {
+export const getUserFetcher = async (email: string): Promise<IUser | null> => {
   const query = gql`
     query {
       getUserByEmail(email: "${email}") {
@@ -19,7 +19,7 @@ export const getUserFetcher = async (email: string): Promise<IUserDb | null> => 
   return res.getUserByEmail;
 };
 
-export const createUserFetcher = async (email: string, name: string): Promise<IUserDb> => {
+export const createUserFetcher = async (email: string, name: string): Promise<IUser> => {
   const query = gql`
     mutation {
       createUser(email: "${email}", name: "${name}") {

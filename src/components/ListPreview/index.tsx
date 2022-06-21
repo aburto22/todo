@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ITodoList } from '@localTypes/.';
+import { ITodoList } from '@localTypes/client';
 import * as styles from './styles';
 
 interface ListPreviewProps {

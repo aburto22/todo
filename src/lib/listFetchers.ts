@@ -1,6 +1,6 @@
 import { gql } from 'graphql-request';
 import fetcher from '@lib/fetcher';
-import { ITodoList } from '@localTypes/.';
+import { ITodoList } from '@localTypes/client';
 
 export const getListFetcher = async (listId: string): Promise<ITodoList | null> => {
   const query = gql`

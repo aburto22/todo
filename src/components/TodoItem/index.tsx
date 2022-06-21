@@ -1,4 +1,4 @@
-import { ITodo } from '@localTypes/.';
+import { ITodo } from '@localTypes/client';
 import { formatDate } from '@lib/dates';
 import * as styles from './styles';
 
