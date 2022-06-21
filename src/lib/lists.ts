@@ -4,10 +4,10 @@ import dbConnect from '@lib/mongoose';
 
 export const getUserLists = async (ownerId: string): Promise<ITodoListDb[]> => {
   await dbConnect();
-  return List.find({ ownerId }).exec();
+  return List.find<ITodoListDb>({ ownerId }).exec();
 };
 
-export const getListById = async (listId: string): Promise<ITodoListDb> => {
+export const getListById = async (listId: string): Promise<ITodoListDb | null> => {
   await dbConnect();
   return List.findById(listId).populate('todos').exec();
 };

@@ -6,7 +6,7 @@ export const createUser = async (email: string, name: string): Promise<IUserDb> 
   try {
     await dbConnect();
 
-    const user = await User.findOne({ email }).exec();
+    const user = await User.findOne<IUserDb>({ email }).exec();
 
     if (user) {
       return user;
@@ -28,5 +28,5 @@ export const createUser = async (email: string, name: string): Promise<IUserDb> 
 export const getUserByEmail = async (email: string): Promise<IUserDb | null> => {
   await dbConnect();
 
-  return User.findOne({ email }).exec();
+  return User.findOne<IUserDb>({ email }).exec();
 };

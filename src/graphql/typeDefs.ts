@@ -37,6 +37,7 @@ const typeDefs = gql`
     createUser(email: String!, name: String!): User!
     createList(name: String, ownerId: String): List
     createTodo(title: String, description: String, listId: String): List
+    deleteTodo(todoId: String, listId: String): List
   }
 `;
 

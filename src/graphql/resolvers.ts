@@ -1,6 +1,6 @@
 import { createUser, getUserByEmail } from '@lib/users';
 import { getUserLists, getListById, createList } from '@lib/lists';
-import { createTodo } from '@lib/todos';
+import { createTodo, deleteTodo } from '@lib/todos';
 
 const resolvers = {
   Query: {
@@ -21,6 +21,10 @@ const resolvers = {
       parent: any,
       { title, description, listId }: { title: string, description: string, listId: string },
     ) => createTodo(title, description, listId),
+    deleteTodo: async (
+      parent: any,
+      { todoId, listId }: { todoId: string, listId: string },
+    ) => deleteTodo(todoId, listId),
   },
 };
 

@@ -19,7 +19,7 @@ const AllLists = () => {
   return (
     <styles.List>
       {lists.map((list) => (
-        <li key={list._id.valueOf().toString()}>
+        <li key={list._id}>
           <ListPreview list={list} />
         </li>
       ))}

@@ -24,7 +24,7 @@ export const getListFetcher = async (listId: string): Promise<ITodoList | null> 
 `;
 
   const res = await fetcher(query);
-  return res.getListById;
+  return res ? res.getListById : null;
 };
 
 export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]> => {
