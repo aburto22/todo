@@ -8,8 +8,7 @@ const typeDefs = gql`
   }
 
   type Query {
-    getUserByEmail(email: String!): User!
-    createUser(email: String!, name: String!): User
+    getOrCreateUser(email: String!, name: String!): User
   }
 `;
 
