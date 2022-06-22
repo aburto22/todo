@@ -1,7 +1,7 @@
 import { ITodo } from '@localTypes/client';
 import { formatDate } from '@lib/dates';
 import { useList } from '@hooks/swr';
-import { removeTodoFromList, updateTodoInList } from '@lib/todos';
+import { removeTodoFromList, updateTodoInList, toggleTodo } from '@lib/todos';
 import { updateListFetcher } from '@lib/listFetchers';
 import * as styles from './styles';
 
@@ -18,11 +18,7 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
   }
 
   const handleDoneClick = () => {
-    const updatedTodo = {
-      ...todo,
-      done: !todo.done,
-      updatedAt: Date(),
-    };
+    const updatedTodo = toggleTodo(todo);
     const updatedList = updateTodoInList(list, updatedTodo);
 
     const options = {

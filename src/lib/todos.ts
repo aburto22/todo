@@ -10,18 +10,11 @@ export const createTodo = (title: string, description: string): ITodo => ({
   done: false,
 });
 
-// export const toggleTodo = (list: ITodoList, todoId: string): ITodoList => ({
-//   ...list,
-//   todos: list.todos.map((todo) => {
-//     if (todo.id === todoId) {
-//       return {
-//         ...todo,
-//         done: !todo.done,
-//       };
-//     }
-//     return todo;
-//   }),
-// });
+export const toggleTodo = (todo: ITodo): ITodo => ({
+  ...todo,
+  updatedAt: Date(),
+  done: !todo.done,
+});
 
 export const addTodoToList = (list: ITodoList, newTodo: ITodo): ITodoList => ({
   ...list,
