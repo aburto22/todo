@@ -37,3 +37,15 @@ export const updateList = async (updatedList: ITodoList): Promise<ITodoListDb> =
 
   return savedList;
 };
+
+export const deleteList = async (listId: string): Promise<ITodoListDb> => {
+  await dbConnect();
+
+  const deletedList = await List.findOneAndDelete({ id: listId }).exec();
+
+  if (!deletedList) {
+    throw new Error('List not found');
+  }
+
+  return deletedList;
+};

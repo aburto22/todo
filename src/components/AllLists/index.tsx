@@ -7,7 +7,8 @@ import * as styles from './styles';
 
 const AllLists = () => {
   const { user } = useUser();
-  const { lists } = useUserLists(user?.sub || '');
+  const userId = user?.sub || '';
+  const { lists } = useUserLists(userId);
 
   if (!lists) {
     return <Spinner size="normal" />;
@@ -21,7 +22,7 @@ const AllLists = () => {
     <styles.List>
       {lists.map((list) => (
         <li key={list.id}>
-          <ListPreview list={list} />
+          <ListPreview list={list} userId={userId} />
         </li>
       ))}
     </styles.List>

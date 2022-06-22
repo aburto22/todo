@@ -56,6 +56,7 @@ const typeDefs = gql`
     createUser(email: String!, name: String!): User!
     saveNewList(list: inputList): List!
     updateList(updatedList: inputList): List
+    deleteList(listId: String): List
   }
 `;
 

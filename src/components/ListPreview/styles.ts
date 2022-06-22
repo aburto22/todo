@@ -29,15 +29,20 @@ export const Side = styled.div`
   gap: 0.2rem;
   background-color: white;
   border: 1px solid ${colors.blue};
-  color: ${colors.black};
   padding: 0 0.2rem;
   border-radius:  0 0.5rem 0.5rem 0;
 `;
 
 export const DeleteButton = styled(BaseSvgButton)`
+  color: ${colors.darkGray};
   border-radius: 0.5rem;
 `;
 
-export const FreezeButton = styled(BaseSvgButton)`
+interface FreezeButtonProps {
+  isFreezed: boolean;
+}
+
+export const FreezeButton = styled(BaseSvgButton)<FreezeButtonProps>`
+  color: ${({ isFreezed }) => (isFreezed ? colors.black : colors.gray)};
   border-radius: 0.5rem;
 `;

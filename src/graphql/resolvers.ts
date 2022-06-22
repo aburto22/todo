@@ -1,6 +1,6 @@
 import { createUser, getUserByEmail } from '@lib/users';
 import {
-  getUserLists, getListById, saveNewList, updateList,
+  getUserLists, getListById, saveNewList, updateList, deleteList,
 } from '@lib/listsDb';
 import { ITodoList } from '@localTypes/client';
 
@@ -23,6 +23,10 @@ const resolvers = {
       parent: any,
       { updatedList }: { updatedList: ITodoList },
     ) => updateList(updatedList),
+    deleteList: async (
+      parent: any,
+      { listId }: { listId: string },
+    ) => deleteList(listId),
   },
 };
 

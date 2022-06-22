@@ -103,3 +103,31 @@ export const updateListFetcher = async (updatedList: ITodoList): Promise<ITodoLi
   const res = await fetcher(query, variables);
   return res.updateList;
 };
+
+export const deleteListFetcher = async (listId: string): Promise<ITodoList> => {
+  const query = gql`
+    mutation deleteList($listId: String!) {
+      deleteList(listId: $listId) {
+        id
+        name
+        ownerId
+        isFreezed
+        createdAt
+        updatedAt
+        todos {
+          id
+          title
+          description
+          done
+          createdAt
+          updatedAt
+        }
+      }
+    }
+  `;
+
+  const variables = { listId };
+
+  const res = await fetcher(query, variables);
+  return res.deleteList;
+};
