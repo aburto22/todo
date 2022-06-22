@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { ITodo } from '@localTypes/client';
 import FocusTodoContent from '@components/FocusTodoContent';
+import EditTodoForm from '@components/EditTodoForm';
 import * as styles from './styles';
 
 interface FocusTodoProps {
@@ -20,14 +21,6 @@ const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
     setTodo(null);
   };
 
-  const handleCancelClick = () => {
-    setIsEditing(false);
-  };
-
-  const handleSaveClick = () => {
-    setIsEditing(false);
-  };
-
   return (
     <styles.Container>
       <styles.CloseButton type="button" onClick={handleCloseClick}>
@@ -42,22 +35,11 @@ const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
         </svg>
       </styles.CloseButton>
       {isEditing ? (
-        <>
-          <styles.Button
-            type="button"
-            styleType="success"
-            onClick={handleSaveClick}
-          >
-            Save
-          </styles.Button>
-          <styles.Button
-            type="button"
-            styleType="danger"
-            onClick={handleCancelClick}
-          >
-            Cancel
-          </styles.Button>
-        </>
+        <EditTodoForm
+          title={todo.title}
+          description={todo.description}
+          setIsEditing={setIsEditing}
+        />
       ) : (
         <FocusTodoContent
           title={todo.title}

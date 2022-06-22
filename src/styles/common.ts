@@ -99,4 +99,5 @@ export const BaseTextarea = styled.textarea`
   height: 5rem;
   font-size: 0.9rem;
   line-height: 1.1rem;
+  word-break: break-word;
 `;
