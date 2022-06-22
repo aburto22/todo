@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { updateListFetcher } from '@lib/listFetchers';
 import { addTodoToList, createTodo } from '@lib/todos';
 import { useList } from '@hooks/swr';
+import { useUser } from '@auth0/nextjs-auth0';
+import { canUserEdit } from '@lib/misc';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -12,6 +14,7 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const { list, mutate } = useList(listId);
+  const { user } = useUser();
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -54,7 +57,13 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
         Description:
         <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
       </styles.Label>
-      <styles.SubmitButton type="submit" styleType="primary">Add</styles.SubmitButton>
+      <styles.SubmitButton
+        type="submit"
+        styleType="primary"
+        disabled={!canUserEdit(list, user)}
+      >
+        Add
+      </styles.SubmitButton>
     </styles.Form>
   );
 };

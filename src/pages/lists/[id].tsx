@@ -30,6 +30,9 @@ const List: NextPage = () => {
       </Head>
       <styles.Main>
         <styles.Title>{`List: ${list.name}`}</styles.Title>
+        <styles.InfoContainer>
+          <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
+        </styles.InfoContainer>
         <styles.Section>
           <CreateTodoForm listId={listId} />
         </styles.Section>

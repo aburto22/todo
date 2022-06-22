@@ -15,8 +15,15 @@ export const BaseH3 = styled.h3`
   font-size: 1.2rem;
 `;
 
+export const BaseH6 = styled.h6`
+  color: ${colors.black};
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
+
 interface ButtonProps {
   styleType?: 'primary' | 'success' | 'danger';
+  disabled?: boolean;
 }
 
 export const BaseButton = styled.button<ButtonProps>`
@@ -52,13 +59,21 @@ export const BaseButton = styled.button<ButtonProps>`
     `;
   }}
 
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    cursor: default;
+  `}
+
   :hover {
-    transform: scale(1.08);
+    ${({ disabled }) => !disabled && css`
+      transform: scale(1.08);
+    `}
   }
 `;
 
 interface BaseSvgButtonProps {
   size?: 'large';
+  disabled?: boolean;
 }
 
 export const BaseSvgButton = styled.button<BaseSvgButtonProps>`
@@ -88,8 +103,15 @@ export const BaseSvgButton = styled.button<BaseSvgButtonProps>`
     width: 100%;
   }
 
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    cursor: default;
+  `}
+
   :hover {
-    color: ${colors.blue};
+    ${({ disabled }) => !disabled && css`
+      color: ${colors.blue};
+    `}
   }
 `;
 

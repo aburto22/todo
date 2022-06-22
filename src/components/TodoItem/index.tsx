@@ -4,6 +4,8 @@ import { useList } from '@hooks/swr';
 import { removeTodoFromList, updateTodoInList, toggleTodo } from '@lib/todos';
 import { updateListFetcher } from '@lib/listFetchers';
 import { DeleteSvg, EditSvg, DoneSvg } from '@components/Svg';
+import { canUserEdit } from '@lib/misc';
+import { useUser } from '@auth0/nextjs-auth0';
 import * as styles from './styles';
 
 interface TodoItemProps {
@@ -14,6 +16,7 @@ interface TodoItemProps {
 
 const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
   const { list, mutate } = useList(listId);
+  const { user } = useUser();
 
   if (!list) {
     return null;
@@ -62,13 +65,28 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
           <p>{formatDate(todo.updatedAt)}</p>
         </styles.DateInfo>
         <styles.ButtonContainer>
-          <styles.EditButton type="button" onClick={handleEditClick} title="edit">
+          <styles.EditButton
+            type="button"
+            onClick={handleEditClick}
+            title="edit"
+            disabled={!canUserEdit(list, user)}
+          >
             <EditSvg />
           </styles.EditButton>
-          <styles.DeleteButton type="button" onClick={handleDeleteClick} title="delete">
+          <styles.DeleteButton
+            type="button"
+            onClick={handleDeleteClick}
+            title="delete"
+            disabled={!canUserEdit(list, user)}
+          >
             <DeleteSvg />
           </styles.DeleteButton>
-          <styles.DoneButton type="button" onClick={handleDoneClick} title="toggle completed">
+          <styles.DoneButton
+            type="button"
+            onClick={handleDoneClick}
+            title="toggle completed"
+            disabled={!canUserEdit(list, user)}
+          >
             <DoneSvg />
           </styles.DoneButton>
         </styles.ButtonContainer>
