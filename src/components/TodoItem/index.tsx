@@ -27,6 +27,8 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
     const options = {
       optimisticData: updatedList,
       rollbackOnError: true,
+      populateCache: true,
+      revalidate: false,
     };
 
     mutate(updateListFetcher(updatedList), options);
@@ -42,6 +44,8 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
     const options = {
       optimisticData: updatedList,
       rollbackOnError: true,
+      populateCache: true,
+      revalidate: false,
     };
 
     mutate(updateListFetcher(updatedList), options);
@@ -49,7 +53,7 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
 
   return (
     <>
-      <FocusTodo todo={focusTodo} setTodo={setFocusTodo} />
+      <FocusTodo todo={focusTodo} setTodo={setFocusTodo} listId={listId} />
       <styles.Todo done={todo.done}>
         <styles.Content done={todo.done}>
           <styles.Title>{todo.title}</styles.Title>

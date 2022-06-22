@@ -7,9 +7,10 @@ import * as styles from './styles';
 interface FocusTodoProps {
   todo: ITodo | null;
   setTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
+  listId: string,
 }
 
-const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
+const FocusTodo = ({ todo, setTodo, listId }: FocusTodoProps) => {
   const [isEditing, setIsEditing] = useState(false);
 
   if (!todo) {
@@ -36,9 +37,9 @@ const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
       </styles.CloseButton>
       {isEditing ? (
         <EditTodoForm
-          title={todo.title}
-          description={todo.description}
+          todo={todo}
           setIsEditing={setIsEditing}
+          listId={listId}
         />
       ) : (
         <FocusTodoContent

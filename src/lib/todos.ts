@@ -16,6 +16,12 @@ export const toggleTodo = (todo: ITodo): ITodo => ({
   done: !todo.done,
 });
 
+export const updateTodo = (todo: ITodo, updatedData: Partial<ITodo>): ITodo => ({
+  ...todo,
+  ...updatedData,
+  updatedAt: Date(),
+});
+
 export const addTodoToList = (list: ITodoList, newTodo: ITodo): ITodoList => ({
   ...list,
   updatedAt: Date(),

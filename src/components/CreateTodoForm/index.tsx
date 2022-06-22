@@ -28,12 +28,14 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
       return;
     }
 
-    const newTodo = createTodo(title, description);
+    const newTodo = createTodo(title.trim(), description.trim());
     const updatedList = addTodoToList(list, newTodo);
 
     const options = {
       optimisticData: updatedList,
       rollbackOnError: true,
+      populateCache: true,
+      revalidate: false,
     };
 
     mutate(updateListFetcher(updatedList), options);

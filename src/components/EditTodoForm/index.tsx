@@ -1,25 +1,48 @@
 import { useState } from 'react';
+import { ITodo } from '@localTypes/client';
+import { updateTodo, updateTodoInList } from '@lib/todos';
+import { useList } from '@hooks/swr';
+import { updateListFetcher } from '@lib/listFetchers';
 import * as styles from './styles';
 
 interface EditTodoFormProps {
-  title: string;
-  description: string;
+  todo: ITodo;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  listId: string;
 }
 
-const EditTodoForm = ({ title, description, setIsEditing }: EditTodoFormProps) => {
-  const [titleInput, setTitleInput] = useState(title);
-  const [descriptionInput, setDescriptionInput] = useState(description);
+const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
+  const [titleInput, setTitleInput] = useState(todo.title);
+  const [descriptionInput, setDescriptionInput] = useState(todo.description);
+  const { list, mutate } = useList(listId);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-  };
 
-  const handleCancelClick = () => {
+    if (!list) {
+      return;
+    }
+
+    const updatedData = {
+      title: titleInput.trim(),
+      description: descriptionInput.trim(),
+    };
+    const updatedTodo = updateTodo(todo, updatedData);
+    const updatedList = updateTodoInList(list, updatedTodo);
+
+    const options = {
+      optimisticData: updatedList,
+      rollbackOnError: true,
+      populateCache: true,
+      revalidate: false,
+    };
+
+    mutate(updateListFetcher(updatedList), options);
+
     setIsEditing(false);
   };
 
-  const handleSaveClick = () => {
+  const handleCancelClick = () => {
     setIsEditing(false);
   };
 
@@ -28,6 +51,7 @@ const EditTodoForm = ({ title, description, setIsEditing }: EditTodoFormProps) =
       <styles.TitleInput
         value={titleInput}
         onChange={(e) => setTitleInput(e.target.value)}
+        required
       />
       <styles.DescriptionInput
         value={descriptionInput}
@@ -37,7 +61,6 @@ const EditTodoForm = ({ title, description, setIsEditing }: EditTodoFormProps) =
         <styles.Button
           type="submit"
           styleType="success"
-          onClick={handleSaveClick}
         >
           Save
         </styles.Button>
