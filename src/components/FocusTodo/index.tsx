@@ -1,25 +1,46 @@
-import { useState } from 'react';
-import { ITodo } from '@localTypes/client';
+import { useState, useEffect } from 'react';
 import FocusTodoContent from '@components/FocusTodoContent';
 import EditTodoForm from '@components/EditTodoForm';
+import { useList } from '@hooks/swr';
 import * as styles from './styles';
 
 interface FocusTodoProps {
-  todo: ITodo | null;
-  setTodo: React.Dispatch<React.SetStateAction<ITodo | null>>;
+  todoId: string;
+  setTodoId: React.Dispatch<React.SetStateAction<string>>;
   listId: string,
 }
 
-const FocusTodo = ({ todo, setTodo, listId }: FocusTodoProps) => {
+const FocusTodo = ({ todoId, setTodoId, listId }: FocusTodoProps) => {
   const [isEditing, setIsEditing] = useState(false);
+  const { list } = useList(listId);
+  const todo = list?.todos.find((t) => t.id === todoId);
 
-  if (!todo) {
+  useEffect(() => {
+    const closeFocus = (e: KeyboardEvent) => {
+      if (!todoId) {
+        return;
+      }
+
+      if (e.key === 'Escape') {
+        setTodoId('');
+        setIsEditing(false);
+      }
+    };
+
+    window.addEventListener('keydown', closeFocus);
+
+    return () => {
+      window.removeEventListener('keydown', closeFocus);
+    };
+  }, [todoId, setTodoId]);
+
+  if (!list || !todo) {
     return null;
   }
 
   const handleCloseClick = () => {
     setIsEditing(false);
-    setTodo(null);
+    setTodoId('');
   };
 
   return (

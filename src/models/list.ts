@@ -28,6 +28,11 @@ const listSchema = new mongoose.Schema({
   },
   todos: {
     type: [{
+      id: {
+        type: String,
+        required: true,
+        unique: true,
+      },
       title: {
         type: String,
         required: true,
