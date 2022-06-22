@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ITodo } from '@localTypes/client';
+import FocusTodoContent from '@components/FocusTodoContent';
 import * as styles from './styles';
 
 interface FocusTodoProps {
@@ -17,10 +18,6 @@ const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
   const handleCloseClick = () => {
     setIsEditing(false);
     setTodo(null);
-  };
-
-  const handleEditClick = () => {
-    setIsEditing(true);
   };
 
   const handleCancelClick = () => {
@@ -44,38 +41,30 @@ const FocusTodo = ({ todo, setTodo }: FocusTodoProps) => {
           <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
         </svg>
       </styles.CloseButton>
-      <styles.Todo>
-        <styles.Title>{todo.title}</styles.Title>
-        <styles.Description>{todo.description}</styles.Description>
-        <styles.ButtonContainer>
-          {isEditing ? (
-            <>
-              <styles.Button
-                type="button"
-                styleType="success"
-                onClick={handleSaveClick}
-              >
-                Save
-              </styles.Button>
-              <styles.Button
-                type="button"
-                styleType="danger"
-                onClick={handleCancelClick}
-              >
-                Cancel
-              </styles.Button>
-            </>
-          ) : (
-            <styles.Button
-              type="button"
-              styleType="primary"
-              onClick={handleEditClick}
-            >
-              Edit
-            </styles.Button>
-          )}
-        </styles.ButtonContainer>
-      </styles.Todo>
+      {isEditing ? (
+        <>
+          <styles.Button
+            type="button"
+            styleType="success"
+            onClick={handleSaveClick}
+          >
+            Save
+          </styles.Button>
+          <styles.Button
+            type="button"
+            styleType="danger"
+            onClick={handleCancelClick}
+          >
+            Cancel
+          </styles.Button>
+        </>
+      ) : (
+        <FocusTodoContent
+          title={todo.title}
+          description={todo.description}
+          setIsEditing={setIsEditing}
+        />
+      )}
     </styles.Container>
   );
 };
