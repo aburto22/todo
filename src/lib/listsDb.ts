@@ -22,6 +22,8 @@ export const createList = async (name: string, ownerId: string): Promise<ITodoLi
     name,
     ownerId,
     isFreezed: false,
+    createdAt: Date(),
+    updatedAt: Date(),
     todos: [],
   });
 

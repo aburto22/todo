@@ -23,6 +23,8 @@ const typeDefs = gql`
     ownerId: String
     todos: [Todo]
     isFreezed: Boolean
+    createdAt: String
+    updatedAt: String
   }
 
   input inputTodo {
@@ -40,6 +42,8 @@ const typeDefs = gql`
     ownerId: String
     todos: [inputTodo]
     isFreezed: Boolean
+    createdAt: String
+    updatedAt: String
   }
 
   type Query {

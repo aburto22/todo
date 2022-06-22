@@ -13,6 +13,8 @@ export interface ITodoList {
   todos: ITodo[];
   id: string;
   isFreezed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IUser {

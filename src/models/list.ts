@@ -18,6 +18,14 @@ const listSchema = new mongoose.Schema({
     type: Boolean,
     default: false,
   },
+  createdAt: {
+    type: String,
+    required: true,
+  },
+  updatedAt: {
+    type: String,
+    required: true,
+  },
   todos: {
     type: [{
       title: {

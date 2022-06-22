@@ -25,11 +25,13 @@ export const createTodo = (title: string, description: string): ITodo => ({
 
 export const addTodoToList = (list: ITodoList, newTodo: ITodo): ITodoList => ({
   ...list,
+  updatedAt: Date(),
   todos: [...list.todos, newTodo],
 });
 
 export const updateTodoInList = (list: ITodoList, updatedTodo: ITodo): ITodoList => ({
   ...list,
+  updatedAt: Date(),
   todos: list.todos.map((todo) => {
     if (todo.id === updatedTodo.id) {
       return updatedTodo;
@@ -40,5 +42,6 @@ export const updateTodoInList = (list: ITodoList, updatedTodo: ITodo): ITodoList
 
 export const removeTodoFromList = (list: ITodoList, todoId: string): ITodoList => ({
   ...list,
+  updatedAt: Date(),
   todos: list.todos.filter((todo) => todo.id !== todoId),
 });

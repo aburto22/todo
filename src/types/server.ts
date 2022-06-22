@@ -7,6 +7,8 @@ export interface ITodoListDb extends Document {
   name: string;
   todos: ITodo[];
   isFreezed: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface IUserDb extends Document {
