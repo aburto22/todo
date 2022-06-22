@@ -6,10 +6,12 @@ export const getListFetcher = async (listId: string): Promise<ITodoList | null> 
   const query = gql`
     query getListById($listId: String!) {
       getListById(listId: $listId) {
-        name
         id
+        name
         ownerId
         isFreezed
+        createdAt
+        updatedAt
         todos {
           id
           title
@@ -32,10 +34,15 @@ export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]>
   const query = gql`
     query getUserLists($ownerId: String!) {
       getUserLists(ownerId: $ownerId) {
-        name
         id
+        name
         ownerId
         isFreezed
+        createdAt
+        updatedAt
+        todos {
+          id
+        }
       }
     }
   `;
@@ -46,40 +53,39 @@ export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]>
   return res.getUserLists;
 };
 
-export const createListFetcher = async (name: string, ownerId: string): Promise<ITodoList> => {
+export const saveNewListFetcher = async (list: ITodoList): Promise<ITodoList> => {
   const query = gql`
-    mutation createList($name: String!, $ownerId: String!) {
-      createList(name: $name, ownerId: $ownerId) {
-        name
+    mutation saveNewList($list: inputList!) {
+      saveNewList(list: $list) {
         id
+        name
         ownerId
         isFreezed
+        createdAt
+        updatedAt
         todos {
           id
-          title
-          description
-          done
-          createdAt
-          updatedAt
         }
       }
     }
   `;
 
-  const variables = { name, ownerId };
+  const variables = { list };
 
   const res = await fetcher(query, variables);
-  return res.createList;
+  return res.saveNewList;
 };
 
 export const updateListFetcher = async (updatedList: ITodoList): Promise<ITodoList> => {
   const query = gql`
-    mutation updateList($updatedList: updateList!) {
+    mutation updateList($updatedList: inputList!) {
       updateList(updatedList: $updatedList) {
-        name
         id
+        name
         ownerId
         isFreezed
+        createdAt
+        updatedAt
         todos {
           id
           title

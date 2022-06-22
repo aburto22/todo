@@ -36,7 +36,7 @@ const typeDefs = gql`
     updatedAt: String
   }
 
-  input updateList {
+  input inputList {
     id: String
     name: String
     ownerId: String
@@ -54,8 +54,8 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(email: String!, name: String!): User!
-    createList(name: String, ownerId: String): List!
-    updateList(updatedList: updateList): List
+    saveNewList(list: inputList): List!
+    updateList(updatedList: inputList): List
   }
 `;
 

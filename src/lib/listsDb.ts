@@ -14,18 +14,10 @@ export const getListById = async (listId: string): Promise<ITodoListDb | null> =
   return List.findOne({ id: listId }).populate('todos').exec();
 };
 
-export const createList = async (name: string, ownerId: string): Promise<ITodoListDb> => {
+export const saveNewList = async (list: ITodoList): Promise<ITodoListDb> => {
   await dbConnect();
 
-  const newList = new List({
-    id: uuidv4(),
-    name,
-    ownerId,
-    isFreezed: false,
-    createdAt: Date(),
-    updatedAt: Date(),
-    todos: [],
-  });
+  const newList = new List(list);
 
   return newList.save();
 };

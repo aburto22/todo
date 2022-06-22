@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import { useUserLists } from '@hooks/swr';
 import { useUser } from '@auth0/nextjs-auth0';
-import { createListFetcher } from '@lib/listFetchers';
+import { saveNewListFetcher } from '@lib/listFetchers';
+import { createList } from '@lib/lists';
 import * as styles from './styles';
 
 const CreateListForm = () => {
   const [name, setName] = useState('');
   const { user } = useUser();
   const userId = user?.sub || '';
-  const { mutate } = useUserLists(userId);
+  const { lists, mutate } = useUserLists(userId);
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setName(e.target.value);
@@ -16,14 +17,22 @@ const CreateListForm = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate(async (lists) => {
-      const newList = await createListFetcher(name, userId);
 
-      if (lists) {
-        return [...lists, newList];
-      }
-      return [newList];
-    });
+    if (!lists || !userId) {
+      return;
+    }
+
+    const newList = createList(name, userId);
+
+    const options = {
+      optimisticData: [...lists, newList],
+      rollbackOnError: true,
+    };
+
+    mutate(async () => {
+      const savedList = await saveNewListFetcher(newList);
+      return [...lists, savedList];
+    }, options);
     setName('');
   };
 

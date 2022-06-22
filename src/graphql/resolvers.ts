@@ -1,6 +1,6 @@
 import { createUser, getUserByEmail } from '@lib/users';
 import {
-  getUserLists, getListById, createList, updateList,
+  getUserLists, getListById, saveNewList, updateList,
 } from '@lib/listsDb';
 import { ITodoList } from '@localTypes/client';
 
@@ -15,10 +15,10 @@ const resolvers = {
       parent: any,
       { email, name }: { email: string, name: string },
     ) => createUser(email, name),
-    createList: async (
+    saveNewList: async (
       parent: any,
-      { name, ownerId }: { name: string, ownerId: string },
-    ) => createList(name, ownerId),
+      { list }: { list: ITodoList },
+    ) => saveNewList(list),
     updateList: async (
       parent: any,
       { updatedList }: { updatedList: ITodoList },
