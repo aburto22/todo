@@ -21,6 +21,7 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
     const updatedTodo = {
       ...todo,
       done: !todo.done,
+      updatedAt: Date(),
     };
     const updatedList = updateTodoInList(list, updatedTodo);
 
@@ -48,9 +49,11 @@ const TodoItem = ({ todo, listId }: TodoItemProps) => {
   };
 
   return (
-    <styles.Todo>
-      <styles.Title>{todo.title}</styles.Title>
-      <styles.Description>{todo.description}</styles.Description>
+    <styles.Todo done={todo.done}>
+      <styles.Content done={todo.done}>
+        <styles.Title>{todo.title}</styles.Title>
+        <styles.Description>{todo.description}</styles.Description>
+      </styles.Content>
       <styles.Footer>
         <styles.DateInfo>
           <p>Last updated:</p>

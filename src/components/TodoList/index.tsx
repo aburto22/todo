@@ -1,6 +1,5 @@
 import TodoItem from '@components/TodoItem';
 import { useList } from '@hooks/swr';
-import Spinner from '@components/Spinner';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -8,14 +7,10 @@ interface TodoListProps {
 }
 
 const TodoList = ({ listId }: TodoListProps) => {
-  const { list, error } = useList(listId);
-
-  if (error) {
-    console.error(error);
-  }
+  const { list } = useList(listId);
 
   if (!list) {
-    return <Spinner size="normal" />;
+    return null;
   }
 
   const doneTodos = list.todos.filter((todo) => todo.done);
@@ -23,9 +18,9 @@ const TodoList = ({ listId }: TodoListProps) => {
 
   return (
     <>
-      {list.todos.length > 0 && (
+      {pendingTodos.length > 0 && (
         <>
-          <styles.Subheading>Pending</styles.Subheading>
+          <styles.Subheading>{`Pending (${pendingTodos.length})`}</styles.Subheading>
           <styles.List>
             {pendingTodos.map((todo) => (
               <li key={todo.id}>

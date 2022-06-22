@@ -1,26 +1,52 @@
 import { boxShadow, colors } from '@styles/cssVariables';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { BaseH3, BaseSvgButton } from '@styles/common';
 
-export const Todo = styled.article`
+interface TodoProps {
+  done: boolean;
+}
+
+export const Todo = styled.article<TodoProps>`
   width: 17rem;
   height: 22rem;
   box-shadow: ${boxShadow.light};
   padding: 1rem;
   word-break: break-word;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) 1.5rem;
+  gap: 0.5rem;
   transition: transform 300ms;
+  ${({ done }) => done && css`
+    background-color: ${colors.lightGray};
+  `}
 
   :hover {
     transform: scale(1.05);
   }
 `;
 
+interface ContentProps {
+  done: boolean;
+}
+
+export const Content = styled.div<ContentProps>`
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  justify-content: flex-start;
+
+  ${({ done }) => done && css`
+    text-decoration: line-through;
+  `}
+`;
+
 export const Title = styled(BaseH3)`
   margin-bottom: 1rem;
   color: ${colors.black};
-  max-height: 15rem;
+  max-height: 13.5rem;
+  line-height: 1.5rem;
+  overflow: hidden;
+  flex-shrink: 0;
 `;
 
 export const Description = styled.p`

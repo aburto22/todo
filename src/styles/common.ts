@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import { colors } from './cssVariables';
 
 export const BaseH1 = styled.h1`
-
+  font-size: 1.7rem;
+  line-height: 2rem;
+  text-align: center;
 `;
 
 export const BaseH2 = styled.h2`
