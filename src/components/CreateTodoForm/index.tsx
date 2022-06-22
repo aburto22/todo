@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { createTodoFetcher } from '@lib/todoFetchers';
-import type { ITodoList } from '@localTypes/client';
-import type { KeyedMutator } from 'swr';
+import { updateListFetcher } from '@lib/listFetchers';
+import { addTodoToList, createTodo } from '@lib/todos';
+import { useList } from '@hooks/swr';
 import * as styles from './styles';
 
 interface TodoListProps {
   listId: string;
-  mutate: KeyedMutator<ITodoList | null>;
 }
 
-const CreateTodoForm = ({ listId, mutate }: TodoListProps) => {
+const CreateTodoForm = ({ listId }: TodoListProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const { list, mutate } = useList(listId);
 
   const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -23,7 +23,20 @@ const CreateTodoForm = ({ listId, mutate }: TodoListProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    mutate(async () => createTodoFetcher(title, description, listId));
+
+    if (!list) {
+      return;
+    }
+
+    const newTodo = createTodo(title, description);
+    const updatedList = addTodoToList(list, newTodo);
+
+    const options = {
+      optimisticData: updatedList,
+      rollbackOnError: true,
+    };
+
+    mutate(updateListFetcher(updatedList), options);
     setTitle('');
     setDescription('');
   };

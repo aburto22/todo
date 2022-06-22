@@ -4,14 +4,14 @@ export interface ITodo {
   done: boolean;
   createdAt: string;
   updatedAt: string;
-  _id: string;
+  id: string;
 }
 
 export interface ITodoList {
   ownerId: string;
   name: string;
   todos: ITodo[];
-  _id: string;
+  id: string;
   isFreezed: boolean;
 }
 
@@ -20,5 +20,5 @@ export interface IUser {
   email: string;
   createdAt: string;
   updatedAt: string;
-  _id: string;
+  id: string;
 }

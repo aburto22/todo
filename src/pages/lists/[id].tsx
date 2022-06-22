@@ -3,14 +3,12 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import * as styles from '@styles/home';
 import CreateTodoForm from '@components/CreateTodoForm';
-import { useList } from '@hooks/swr';
 import TodoList from '@components/TodoList';
 
 const List: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const listId = id?.toString() || '';
-  const { list, mutate } = useList(listId);
 
   return (
     <>
@@ -21,10 +19,10 @@ const List: NextPage = () => {
       </Head>
       <styles.Main>
         <styles.Section>
-          <CreateTodoForm listId={listId} mutate={mutate} />
+          <CreateTodoForm listId={listId} />
         </styles.Section>
         <styles.Section>
-          {list && <TodoList list={list} mutate={mutate} />}
+          <TodoList listId={listId} />
         </styles.Section>
       </styles.Main>
     </>

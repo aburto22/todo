@@ -1,14 +1,22 @@
 import TodoItem from '@components/TodoItem';
-import type { ITodoList } from '@localTypes/client';
-import type { KeyedMutator } from 'swr';
+import { useList } from '@hooks/swr';
 import * as styles from './styles';
 
 interface TodoListProps {
-  mutate: KeyedMutator<ITodoList | null>;
-  list: ITodoList;
+  listId: string;
 }
 
-const TodoList = ({ list, mutate }: TodoListProps) => {
+const TodoList = ({ listId }: TodoListProps) => {
+  const { list, error } = useList(listId);
+
+  if (error) {
+    console.error(error);
+  }
+
+  if (!list) {
+    return null;
+  }
+
   const doneTodos = list.todos.filter((todo) => todo.done);
   const pendingTodos = list.todos.filter((todo) => !todo.done);
 
@@ -19,8 +27,8 @@ const TodoList = ({ list, mutate }: TodoListProps) => {
           <styles.Subheading>Pending</styles.Subheading>
           <styles.List>
             {pendingTodos.map((todo) => (
-              <li key={todo._id}>
-                <TodoItem todo={todo} mutate={mutate} list={list} />
+              <li key={todo.id}>
+                <TodoItem todo={todo} listId={listId} />
               </li>
             ))}
           </styles.List>
@@ -31,8 +39,8 @@ const TodoList = ({ list, mutate }: TodoListProps) => {
           <styles.Subheading>Completed</styles.Subheading>
           <styles.List>
             {doneTodos.map((todo) => (
-              <li key={todo._id}>
-                <TodoItem todo={todo} mutate={mutate} list={list} />
+              <li key={todo.id}>
+                <TodoItem todo={todo} listId={listId} />
               </li>
             ))}
           </styles.List>

@@ -1,3 +1,3 @@
 import { format } from 'date-fns';
 
-export const formatDate = (timestamp: number): string => format(new Date(timestamp), 'd MMM uuuu, H:mm');
+export const formatDate = (date: string): string => format(new Date(date), 'd MMM uuuu, H:mm');

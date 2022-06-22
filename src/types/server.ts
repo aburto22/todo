@@ -1,24 +1,11 @@
-import { Types, Document } from 'mongoose';
-
-export interface ITodoDb extends Document {
-  title: string;
-  description: string;
-  done: boolean;
-  createdAt: string;
-  updatedAt: string;
-}
+import { Document } from 'mongoose';
+import { ITodo } from '@localTypes/client';
 
 export interface ITodoListDb extends Document {
+  id: string;
   ownerId: string;
   name: string;
-  todos: Types.ObjectId[];
-  isFreezed: boolean;
-}
-
-export interface ITodoListPopulatedDb extends Document {
-  ownerId: string;
-  name: string;
-  todos: ITodoDb[];
+  todos: ITodo[];
   isFreezed: boolean;
 }
 

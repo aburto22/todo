@@ -10,9 +10,6 @@ interface AuthenticationProps {
 
 const Authentication = ({ children }: AuthenticationProps) => {
   const { user, isLoading, error } = useUser();
-  // const { user: userSwr, mutate } = useUserSwr(user?.email || '');
-
-  // console.log(user);
 
   if (isLoading) {
     return <MessageScreen message="loading..." />;
@@ -25,10 +22,6 @@ const Authentication = ({ children }: AuthenticationProps) => {
   if (!user) {
     return <MessageScreen message="Log-in to start using the app!" />;
   }
-
-  // if (userSwr === null) {
-  //   mutate(createUserFetcher(user.email || '', user.name || ''));
-  // }
 
   return <>{children}</>;
 };

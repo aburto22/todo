@@ -1,18 +1,35 @@
-import { ITodo, ITodoList } from '@localTypes/client';
+import { ITodo } from '@localTypes/client';
 import { formatDate } from '@lib/dates';
-import { deleteTodoFetcher } from '@lib/todoFetchers';
-import type { KeyedMutator } from 'swr';
+import { useList } from '@hooks/swr';
+import { removeTodoFromList, updateTodoInList } from '@lib/todos';
+import { updateListFetcher } from '@lib/listFetchers';
 import * as styles from './styles';
 
 interface TodoItemProps {
   todo: ITodo;
-  mutate: KeyedMutator<ITodoList | null>;
-  list: ITodoList;
+  listId: string;
 }
 
-const TodoItem = ({ todo, mutate, list }: TodoItemProps) => {
-  const handleDoneClick = () => {
+const TodoItem = ({ todo, listId }: TodoItemProps) => {
+  const { list, mutate } = useList(listId);
 
+  if (!list) {
+    return null;
+  }
+
+  const handleDoneClick = () => {
+    const updatedTodo = {
+      ...todo,
+      done: !todo.done,
+    };
+    const updatedList = updateTodoInList(list, updatedTodo);
+
+    const options = {
+      optimisticData: updatedList,
+      rollbackOnError: true,
+    };
+
+    mutate(updateListFetcher(updatedList), options);
   };
 
   const handleEditClick = () => {
@@ -20,17 +37,14 @@ const TodoItem = ({ todo, mutate, list }: TodoItemProps) => {
   };
 
   const handleDeleteClick = async () => {
-    const optimisticData = {
-      ...list,
-      todos: list.todos.filter((t) => t._id !== todo._id),
-    };
+    const updatedList = removeTodoFromList(list, todo.id);
 
     const options = {
-      optimisticData,
+      optimisticData: updatedList,
       rollbackOnError: true,
     };
 
-    mutate(deleteTodoFetcher(todo._id, list._id), options);
+    mutate(updateListFetcher(updatedList), options);
   };
 
   return (
@@ -40,7 +54,7 @@ const TodoItem = ({ todo, mutate, list }: TodoItemProps) => {
       <styles.Footer>
         <styles.DateInfo>
           <p>Last updated:</p>
-          <p>{formatDate(Number(todo.updatedAt))}</p>
+          <p>{formatDate(todo.updatedAt)}</p>
         </styles.DateInfo>
         <styles.ButtonContainer>
           <styles.EditButton type="button" onClick={handleEditClick} title="edit">

@@ -1,6 +1,8 @@
 import { createUser, getUserByEmail } from '@lib/users';
-import { getUserLists, getListById, createList } from '@lib/lists';
-import { createTodo, deleteTodo } from '@lib/todos';
+import {
+  getUserLists, getListById, createList, updateList,
+} from '@lib/listsDb';
+import { ITodoList } from '@localTypes/client';
 
 const resolvers = {
   Query: {
@@ -17,14 +19,10 @@ const resolvers = {
       parent: any,
       { name, ownerId }: { name: string, ownerId: string },
     ) => createList(name, ownerId),
-    createTodo: async (
+    updateList: async (
       parent: any,
-      { title, description, listId }: { title: string, description: string, listId: string },
-    ) => createTodo(title, description, listId),
-    deleteTodo: async (
-      parent: any,
-      { todoId, listId }: { todoId: string, listId: string },
-    ) => deleteTodo(todoId, listId),
+      { updatedList }: { updatedList: ITodoList },
+    ) => updateList(updatedList),
   },
 };
 
