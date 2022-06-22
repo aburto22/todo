@@ -20,7 +20,6 @@ export const createUser = async (email: string, name: string): Promise<IUserDb> 
 
     return await newUser.save();
   } catch (err) {
-    console.error(err);
     return await User.findOne({ email }).exec();
   }
 };

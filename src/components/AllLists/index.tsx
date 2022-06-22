@@ -2,6 +2,7 @@ import { useUser } from '@auth0/nextjs-auth0';
 import ListPreview from '@components/ListPreview';
 import { useUserLists } from '@hooks/swr';
 import MessageScreen from '@components/MessageScreen';
+import Spinner from '@components/Spinner';
 import * as styles from './styles';
 
 const AllLists = () => {
@@ -9,7 +10,7 @@ const AllLists = () => {
   const { lists } = useUserLists(user?.sub || '');
 
   if (!lists) {
-    return null;
+    return <Spinner size="normal" />;
   }
 
   if (lists.length === 0) {

@@ -1,5 +1,6 @@
 import TodoItem from '@components/TodoItem';
 import { useList } from '@hooks/swr';
+import Spinner from '@components/Spinner';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -14,7 +15,7 @@ const TodoList = ({ listId }: TodoListProps) => {
   }
 
   if (!list) {
-    return null;
+    return <Spinner size="normal" />;
   }
 
   const doneTodos = list.todos.filter((todo) => todo.done);
