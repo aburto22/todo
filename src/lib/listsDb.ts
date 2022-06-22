@@ -1,7 +1,6 @@
 import { ITodoListDb } from '@localTypes/server';
 import List from '@models/list';
 import dbConnect from '@lib/mongoose';
-import { v4 as uuidv4 } from 'uuid';
 import { ITodoList } from '@localTypes/client';
 
 export const getUserLists = async (ownerId: string): Promise<ITodoListDb[]> => {

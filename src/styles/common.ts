@@ -57,13 +57,31 @@ export const BaseButton = styled.button<ButtonProps>`
   }
 `;
 
-export const BaseSvgButton = styled.button`
-  padding: 0.3rem;
+interface BaseSvgButtonProps {
+  size?: 'large';
+}
+
+export const BaseSvgButton = styled.button<BaseSvgButtonProps>`
   transition: transform 300ms;
-  border-radius: 0.3rem;
   display: block;
-  width: 2rem;
-  height: 2rem;
+
+  ${({ size }) => {
+    if (size === 'large') {
+      return css`
+        width: 3rem;
+        height: 3rem;
+        border-radius: 0.5rem;
+        padding: 0.5rem;
+      `;
+    }
+
+    return css`
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.3rem;
+      padding: 0.3rem;
+    `;
+  }}
 
   svg {
     height: 100%;

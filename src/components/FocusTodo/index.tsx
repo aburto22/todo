@@ -45,7 +45,7 @@ const FocusTodo = ({ todoId, setTodoId, listId }: FocusTodoProps) => {
 
   return (
     <styles.Container>
-      <styles.CloseButton type="button" onClick={handleCloseClick}>
+      <styles.CloseButton type="button" onClick={handleCloseClick} size="large">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
