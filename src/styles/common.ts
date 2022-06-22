@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import { colors } from './cssVariables';
 
 export const BaseH1 = styled.h1`
@@ -16,7 +16,7 @@ export const BaseH3 = styled.h3`
 `;
 
 interface ButtonProps {
-  styleType?: 'primary';
+  styleType?: 'primary' | 'success' | 'danger';
 }
 
 export const BaseButton = styled.button<ButtonProps>`
@@ -28,12 +28,26 @@ export const BaseButton = styled.button<ButtonProps>`
 
   ${({ styleType }) => {
     if (styleType === 'primary') {
-      return `
+      return css`
         background-color: ${colors.blue};
         color: ${colors.white};
       `;
     }
-    return `
+    if (styleType === 'success') {
+      return css`
+        background-color: ${colors.green};
+        color: ${colors.white};
+        border-color: ${colors.green};
+      `;
+    }
+    if (styleType === 'danger') {
+      return css`
+        background-color: ${colors.red};
+        color: ${colors.white};
+        border-color: ${colors.red};
+      `;
+    }
+    return css`
       color: ${colors.blue};
     `;
   }}

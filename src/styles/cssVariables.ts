@@ -13,6 +13,7 @@ export const colors = {
   gray: '#918B76',
   lightGray: '#C1BDB3',
   green: '#06A77D',
+  overscreen: '#3C474BFA',
 };
 
 export const boxShadow = {
