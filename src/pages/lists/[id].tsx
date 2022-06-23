@@ -39,10 +39,6 @@ const List: NextPage = () => {
     console.error(error);
   }
 
-  if (!list) {
-    return <Spinner size="normal" />;
-  }
-
   return (
     <>
       <Head>
@@ -51,16 +47,20 @@ const List: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <styles.Main>
-        <styles.Title>{`List: ${list.name}`}</styles.Title>
-        <styles.InfoContainer>
-          <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
-        </styles.InfoContainer>
-        <styles.Section>
-          <CreateTodoForm listId={listId} />
-        </styles.Section>
-        <styles.Section>
-          <TodoList listId={listId} />
-        </styles.Section>
+        {list ? (
+          <>
+            <styles.Title>{`List: ${list.name}`}</styles.Title>
+            <styles.InfoContainer>
+              <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
+            </styles.InfoContainer>
+            <styles.Section>
+              <CreateTodoForm listId={listId} />
+            </styles.Section>
+            <styles.Section>
+              <TodoList listId={listId} />
+            </styles.Section>
+          </>
+        ) : <Spinner size="normal" />}
       </styles.Main>
     </>
   );
