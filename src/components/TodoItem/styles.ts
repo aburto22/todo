@@ -31,7 +31,7 @@ interface ContentProps {
   done: boolean;
 }
 
-export const Content = styled.div<ContentProps>`
+export const Content = styled.button<ContentProps>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -86,10 +86,6 @@ export const ButtonContainer = styled.div`
 `;
 
 export const DoneButton = styled(BaseSvgButton)`
-
-`;
-
-export const ExpandButton = styled(BaseSvgButton)`
 
 `;
 

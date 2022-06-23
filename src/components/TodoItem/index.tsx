@@ -3,7 +3,7 @@ import { formatDate } from '@lib/dates';
 import { useList } from '@hooks/swr';
 import { removeTodoFromList, updateTodoInList, toggleTodo } from '@lib/todos';
 import { updateListFetcher } from '@lib/listFetchers';
-import { DeleteSvg, ExpandSvg, DoneSvg } from '@components/Svg';
+import { DeleteSvg, DoneSvg } from '@components/Svg';
 import { userNotAllowedToEdit } from '@lib/misc';
 import { useUser } from '@auth0/nextjs-auth0';
 import { triggerPusher } from '@lib/pusher';
@@ -41,7 +41,7 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
     }, options);
   };
 
-  const handleEditClick = () => {
+  const handleExpandClick = () => {
     setFocusTodoId(todo.id);
   };
 
@@ -66,7 +66,11 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
 
   return (
     <styles.Todo done={todo.done}>
-      <styles.Content done={todo.done}>
+      <styles.Content
+        type="button"
+        done={todo.done}
+        onClick={handleExpandClick}
+      >
         <styles.Title>{todo.title}</styles.Title>
         {todo.description && <styles.Description>{todo.description}</styles.Description>}
         <styles.DateInfo>
@@ -75,13 +79,6 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
         </styles.DateInfo>
       </styles.Content>
       <styles.ButtonContainer>
-        <styles.ExpandButton
-          type="button"
-          onClick={handleEditClick}
-          title="edit"
-        >
-          <ExpandSvg />
-        </styles.ExpandButton>
         <styles.DeleteButton
           type="button"
           onClick={handleDeleteClick}
