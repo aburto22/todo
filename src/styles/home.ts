@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { dimensions } from './cssVariables';
-import { BaseH1, BaseH6 } from './common';
+import { BaseH1, BaseH6, BaseSvgToggleButton } from './common';
 
 export const Main = styled.main`
   padding: 1rem;
@@ -33,4 +33,8 @@ export const InfoContainer = styled.div`
 
 export const Info = styled(BaseH6)`
 
+`;
+
+export const FreezeButton = styled(BaseSvgToggleButton)`
+  margin: 0.5rem auto;
 `;

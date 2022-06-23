@@ -3,11 +3,12 @@ import Pusher from 'pusher-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import * as styles from '@styles/home';
 import CreateTodoForm from '@components/CreateTodoForm';
 import Spinner from '@components/Spinner';
 import { useList } from '@hooks/swr';
 import TodoList from '@components/TodoList';
+import { SnowSvg } from '@components/Svg';
+import * as styles from '@styles/home';
 
 const List: NextPage = () => {
   const router = useRouter();
@@ -52,6 +53,9 @@ const List: NextPage = () => {
             <styles.Title>{`List: ${list.name}`}</styles.Title>
             <styles.InfoContainer>
               <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
+              <styles.FreezeButton size="large" active={list.isFreezed}>
+                <SnowSvg />
+              </styles.FreezeButton>
             </styles.InfoContainer>
             <styles.Section>
               <CreateTodoForm listId={listId} />

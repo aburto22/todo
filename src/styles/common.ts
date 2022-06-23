@@ -143,10 +143,17 @@ export const BaseSvgButton = styled.button<BaseSvgButtonProps>`
   ${({ size }) => {
     if (size === 'large') {
       return css`
-        width: 3rem;
-        height: 3rem;
-        border-radius: 0.5rem;
-        padding: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.3rem;
+        padding: 0.3rem;
+
+        @media (min-width: ${dimensions.mobileBreak}) {
+          width: 3rem;
+          height: 3rem;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+        }
       `;
     }
 
@@ -173,6 +180,15 @@ export const BaseSvgButton = styled.button<BaseSvgButtonProps>`
       color: ${colors.blue};
     `}
   }
+`;
+
+interface BaseSvgToggleButtonProps {
+  active: boolean;
+}
+
+export const BaseSvgToggleButton = styled(BaseSvgButton)<BaseSvgToggleButtonProps>`
+  color: ${({ active }) => !active && colors.lightGray};
+  border-radius: 0.5rem;
 `;
 
 export const BaseLabel = styled.label`

@@ -54,16 +54,14 @@ const ListPreview = ({ list, userId }: ListPreviewProps) => {
   return (
     <styles.Container>
       <Link href={`/lists/${list.id}`} passHref>
-        <styles.Link href="dummy">
-          <h2>{list.name}</h2>
-        </styles.Link>
+        <styles.Link href="dummy">{list.name}</styles.Link>
       </Link>
       <styles.Side>
         <styles.FreezeButton
           type="button"
           size="large"
           title="toggle freeze"
-          isFreezed={list.isFreezed}
+          active={list.isFreezed}
           onClick={handleFreezeClick}
         >
           <SnowSvg />
