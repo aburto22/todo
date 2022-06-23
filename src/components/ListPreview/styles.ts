@@ -43,6 +43,6 @@ interface FreezeButtonProps {
 }
 
 export const FreezeButton = styled(BaseSvgButton)<FreezeButtonProps>`
-  color: ${({ isFreezed }) => (isFreezed ? colors.black : colors.gray)};
+  color: ${({ isFreezed }) => (isFreezed ? colors.darkGray : colors.lightGray)};
   border-radius: 0.5rem;
 `;

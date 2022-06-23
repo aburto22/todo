@@ -19,7 +19,7 @@ const Header = () => {
         {user ? (
           <styles.LogoutButton href="/api/auth/logout" styleType="danger">Logout</styles.LogoutButton>
         ) : (
-          <styles.LogoutButton href="/api/auth/login">Login</styles.LogoutButton>
+          <styles.LogoutButton href="/api/auth/login" styleType="primary">Login</styles.LogoutButton>
         )}
       </styles.Nav>
     </styles.Header>

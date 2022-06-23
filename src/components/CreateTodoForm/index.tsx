@@ -56,7 +56,10 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
   const buttonDisabled = userNotAllowedToEdit(list, user);
 
   return (
-    <WithCollapse Title={<styles.Title>Add new todo</styles.Title>}>
+    <WithCollapse
+      Title={<styles.Title>Add new todo</styles.Title>}
+      defaultOpen={list?.todos.length === 0}
+    >
       <styles.Form onSubmit={handleSubmit}>
         <styles.Label htmlFor="title">
           Title:
