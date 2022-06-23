@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { updateListFetcher } from '@lib/listFetchers';
+import { triggerPusher } from '@lib/pusher';
 import { addTodoToList, createTodo } from '@lib/todos';
 import { useList } from '@hooks/swr';
 import { useUser } from '@auth0/nextjs-auth0';
@@ -41,7 +42,12 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
       revalidate: false,
     };
 
-    mutate(updateListFetcher(updatedList), options);
+    mutate(async () => {
+      const savedList = await updateListFetcher(updatedList);
+      await triggerPusher(listId);
+      return savedList;
+    }, options);
+
     setTitle('');
     setDescription('');
   };

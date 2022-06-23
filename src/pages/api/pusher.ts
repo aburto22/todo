@@ -10,12 +10,8 @@ const pusher = new Pusher({
 });
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { message, sender, listId } = req.body;
-  await pusher.trigger('todo-mother', 'message', {
-    listId,
-    message,
-    sender,
-  });
+  const { listId }: { listId: string } = req.body;
+  await pusher.trigger('todo-mother', 'update', { listIdPusher: listId });
 
   res.status(200).end();
 };

@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { ITodo } from '@localTypes/client';
+import { triggerPusher } from '@lib/pusher';
 import { updateTodo, updateTodoInList } from '@lib/todos';
 import { useList } from '@hooks/swr';
 import { updateListFetcher } from '@lib/listFetchers';
@@ -37,7 +38,11 @@ const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
       revalidate: false,
     };
 
-    mutate(updateListFetcher(updatedList), options);
+    mutate(async () => {
+      const savedList = await updateListFetcher(updatedList);
+      await triggerPusher(listId);
+      return savedList;
+    }, options);
 
     setIsEditing(false);
   };

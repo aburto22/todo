@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+import Pusher from 'pusher-js';
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -11,7 +13,27 @@ const List: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const listId = id?.toString() || '';
-  const { list, error } = useList(listId);
+  const { list, error, mutate } = useList(listId);
+
+  useEffect(() => {
+    const pusherKey = process.env.NEXT_PUBLIC_PUSHER_KEY || '';
+
+    const pusher = new Pusher(pusherKey, {
+      cluster: 'eu',
+    });
+
+    const channel = pusher.subscribe('todo-mother');
+
+    channel.bind('update', ({ listIdPusher }: { listIdPusher: string }) => {
+      if (listIdPusher === listId) {
+        mutate();
+      }
+    });
+
+    return () => {
+      pusher.unsubscribe('todo-mother');
+    };
+  }, [listId, mutate]);
 
   if (error) {
     console.error(error);

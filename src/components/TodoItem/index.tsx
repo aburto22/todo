@@ -6,6 +6,7 @@ import { updateListFetcher } from '@lib/listFetchers';
 import { DeleteSvg, ExpandSvg, DoneSvg } from '@components/Svg';
 import { userNotAllowedToEdit } from '@lib/misc';
 import { useUser } from '@auth0/nextjs-auth0';
+import { triggerPusher } from '@lib/pusher';
 import * as styles from './styles';
 
 interface TodoItemProps {
@@ -33,7 +34,11 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
       revalidate: false,
     };
 
-    mutate(updateListFetcher(updatedList), options);
+    mutate(async () => {
+      const savedList = await updateListFetcher(updatedList);
+      await triggerPusher(listId);
+      return savedList;
+    }, options);
   };
 
   const handleEditClick = () => {
@@ -50,7 +55,11 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
       revalidate: false,
     };
 
-    mutate(updateListFetcher(updatedList), options);
+    mutate(async () => {
+      const savedList = await updateListFetcher(updatedList);
+      await triggerPusher(listId);
+      return savedList;
+    }, options);
   };
 
   const buttonDisabled = userNotAllowedToEdit(list, user);
