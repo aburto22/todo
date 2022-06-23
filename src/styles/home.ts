@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { dimensions } from './cssVariables';
+import { dimensions, colors } from './cssVariables';
 import { BaseH1, BaseH6, BaseSvgToggleButton } from './common';
 
 export const Main = styled.main`
@@ -13,7 +13,11 @@ export const Main = styled.main`
 `;
 
 export const Title = styled(BaseH1)`
-  margin: 1.5rem 0 ;
+  margin: 1.5rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 `;
 
 export const Section = styled.section`
@@ -28,7 +32,7 @@ export const Section = styled.section`
 
 export const InfoContainer = styled.div`
   width: max-content;
-  margin: 0 auto 2rem;
+  margin: 0 auto 1rem;
 `;
 
 export const Info = styled(BaseH6)`
@@ -36,5 +40,16 @@ export const Info = styled(BaseH6)`
 `;
 
 export const FreezeButton = styled(BaseSvgToggleButton)`
-  margin: 0.5rem auto;
+  margin: 0.5rem auto 0;
+`;
+
+export const WarningIcon = styled.div`
+  color: ${colors.red};
+  height: 2rem;
+  width: 2rem;
+
+  @media (min-width: ${dimensions.mobileBreak}) {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
 `;

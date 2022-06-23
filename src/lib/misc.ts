@@ -5,3 +5,8 @@ export const userNotAllowedToEdit = (
   list: ITodoList | null | undefined,
   user: UserProfile | undefined,
 ): boolean => Boolean(list && user && list.isFreezed && user.sub !== list.ownerId);
+
+export const isUserOwner = (
+  list: ITodoList | null | undefined,
+  user: UserProfile | undefined,
+): boolean => Boolean(list && user && user.sub === list.ownerId);

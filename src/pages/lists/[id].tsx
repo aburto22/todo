@@ -7,17 +7,21 @@ import CreateTodoForm from '@components/CreateTodoForm';
 import Spinner from '@components/Spinner';
 import { useList } from '@hooks/swr';
 import TodoList from '@components/TodoList';
-import { SnowSvg } from '@components/Svg';
+import { SnowSvg, WarningSvg } from '@components/Svg';
 import { toggleList } from '@lib/lists';
 import { updateListFetcher } from '@lib/listFetchers';
 import { triggerPusher } from '@lib/pusher';
 import * as styles from '@styles/home';
+import { useUser } from '@auth0/nextjs-auth0';
+import { isUserOwner, userNotAllowedToEdit } from '@lib/misc';
+import TooltipIcon from '@components/TooltipIcon';
 
 const List: NextPage = () => {
   const router = useRouter();
   const { id } = router.query;
   const listId = id?.toString() || '';
   const { list, error, mutate } = useList(listId);
+  const { user } = useUser();
 
   if (error) {
     console.error(error);
@@ -72,16 +76,31 @@ const List: NextPage = () => {
       <styles.Main>
         {list ? (
           <>
-            <styles.Title>{`List: ${list.name}`}</styles.Title>
+            <styles.Title>
+              {`List: ${list.name}`}
+              {userNotAllowedToEdit(list, user) && (
+                <TooltipIcon
+                  message="This list is freezed, only the owner can edit its content"
+                  position="bottom"
+                >
+                  <styles.WarningIcon>
+                    <WarningSvg />
+                  </styles.WarningIcon>
+                </TooltipIcon>
+              )}
+            </styles.Title>
             <styles.InfoContainer>
               <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
-              <styles.FreezeButton
-                size="large"
-                active={list.isFreezed}
-                onClick={handleFreezeClick}
-              >
-                <SnowSvg />
-              </styles.FreezeButton>
+              {isUserOwner(list, user) && (
+                <styles.FreezeButton
+                  size="large"
+                  active={list.isFreezed}
+                  onClick={handleFreezeClick}
+                  title="toggle freezed"
+                >
+                  <SnowSvg />
+                </styles.FreezeButton>
+              )}
             </styles.InfoContainer>
             <styles.Section>
               <CreateTodoForm listId={listId} />
