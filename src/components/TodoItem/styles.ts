@@ -1,4 +1,4 @@
-import { boxShadow, colors } from '@styles/cssVariables';
+import { boxShadow, colors, dimensions } from '@styles/cssVariables';
 import styled, { css } from 'styled-components';
 import { BaseH3, BaseSvgButton } from '@styles/common';
 
@@ -7,13 +7,13 @@ interface TodoProps {
 }
 
 export const Todo = styled.article<TodoProps>`
-  width: 17rem;
-  height: 22rem;
+  width: 45rem;
+  max-width: 100%;
   box-shadow: ${boxShadow.light};
-  padding: 1rem;
+  padding: 0.5rem;
   word-break: break-word;
   display: grid;
-  grid-template-rows: minmax(0, 1fr) 1.5rem;
+  grid-template-columns: minmax(0, 1fr) 6rem;
   gap: 0.5rem;
   transition: transform 300ms;
   ${({ done }) => done && css`
@@ -36,44 +36,53 @@ export const Content = styled.div<ContentProps>`
   flex-direction: column;
   overflow: hidden;
   justify-content: flex-start;
+  gap: 0.3rem;
 
   ${({ done }) => done && css`
     text-decoration: line-through;
   `}
+
+  @media (min-width: ${dimensions.mobileBreak}) {
+    gap: 0.5rem;
+  }
 `;
 
 export const Title = styled(BaseH3)`
-  margin-bottom: 1rem;
   color: ${colors.black};
-  max-height: 13.5rem;
-  line-height: 1.5rem;
+  font-size: 1rem;
   overflow: hidden;
-  flex-shrink: 0;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+  @media (min-width: ${dimensions.mobileBreak}) {
+    font-size: 1.2rem;
+  }
 `;
 
 export const Description = styled.p`
-  font-size: 0.9rem;
-  line-height: 1.2rem;
-`;
+  font-size: 0.7rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 500;
 
-export const Footer = styled.div`
-  margin-top: auto;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+  @media (min-width: ${dimensions.mobileBreak}) {
+    font-size: 0.9rem;
+  }
 `;
 
 export const DateInfo = styled.div`
   display: flex;
-  flex-direction: column;
-  font-size: 0.7rem;
+  gap: 0.2rem;
+  font-size: 0.6rem;
   font-weight: 600;
+  color: ${colors.gray};
 `;
 
 export const ButtonContainer = styled.div`
   display: flex;
-  gap: 0.1rem;
   margin-left: auto;
+  align-items: center;
 `;
 
 export const DoneButton = styled(BaseSvgButton)`

@@ -28,7 +28,7 @@ const WithCollapse = ({ Title, children, defaultOpen = false }: WithCollapseProp
         onClick={() => setIsShown((state) => !state)}
       >
         {Title}
-        {isShown ? <ChevronDownSvg /> : <ChevronUpSvg />}
+        {isShown ? <ChevronUpSvg /> : <ChevronDownSvg />}
       </styles.CollapseButton>
       <styles.Content
         isShown={isShown}

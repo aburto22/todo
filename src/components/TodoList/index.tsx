@@ -26,9 +26,9 @@ const TodoList = ({ listId }: TodoListProps) => {
       {pendingTodos.length > 0 && (
         <styles.List>
           {pendingTodos.map((todo) => (
-            <li key={todo.id}>
+            <styles.ListItem key={todo.id}>
               <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
-            </li>
+            </styles.ListItem>
           ))}
         </styles.List>
       )}
@@ -36,9 +36,9 @@ const TodoList = ({ listId }: TodoListProps) => {
         <WithCollapse Title={<styles.Subheading>{`Completed (${doneTodos.length})`}</styles.Subheading>}>
           <styles.List>
             {doneTodos.map((todo) => (
-              <li key={todo.id}>
+              <styles.ListItem key={todo.id}>
                 <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
-              </li>
+              </styles.ListItem>
             ))}
           </styles.List>
         </WithCollapse>

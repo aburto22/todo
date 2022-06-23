@@ -1,18 +1,33 @@
 import styled, { css } from 'styled-components';
-import { colors } from './cssVariables';
+import { colors, dimensions } from './cssVariables';
 
 export const BaseH1 = styled.h1`
-  font-size: 1.7rem;
-  line-height: 2rem;
+  font-size: 1.4rem;
+  line-height: 1.7rem;
   text-align: center;
+
+  @media (min-width: ${dimensions.mobileBreak}){
+    font-size: 1.7rem;
+    line-height: 2rem;
+  }
 `;
 
 export const BaseH2 = styled.h2`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
+
+  @media (min-width: ${dimensions.mobileBreak}){
+    font-size: 1.5rem;
+    line-height: 1.7rem;
+  }
 `;
 
 export const BaseH3 = styled.h3`
-  font-size: 1.2rem;
+  font-size: 1.1rem;
+
+  @media (min-width: ${dimensions.mobileBreak}){
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
 `;
 
 export const BaseH6 = styled.h6`

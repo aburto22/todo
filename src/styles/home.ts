@@ -4,6 +4,8 @@ import { BaseH1, BaseH6 } from './common';
 
 export const Main = styled.main`
   padding: 1rem;
+  max-width: 100%;
+  overflow: hidden;
 
   @media (min-width: ${dimensions.mobileBreak}) {
     padding: 2rem;

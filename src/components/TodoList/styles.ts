@@ -7,8 +7,13 @@ export const Subheading = styled(BaseH2)`
 
 export const List = styled.ul`
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 2rem;
+`;
+
+export const ListItem = styled.li`
+  display: block;
+  max-width: 100%;
 `;

@@ -1,5 +1,5 @@
 import { colors } from '@styles/cssVariables';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface ContainerProps {
   isShown: boolean;
@@ -9,7 +9,7 @@ export const Container = styled.div<ContainerProps>`
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 `;
 
 export const CollapseButton = styled.button`
@@ -39,8 +39,11 @@ interface ContentProps {
 }
 
 export const Content = styled.div<ContentProps>`
-  margin-top: 1rem;
   height: ${({ isShown, height }) => (isShown ? `${height}px` : 0)};
   transition: height 300ms;
   overflow: hidden;
+  margin-top: 1rem;
+  ${({ isShown }) => isShown && css`
+    margin: 1rem 0;
+  `}
 `;

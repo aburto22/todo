@@ -68,39 +68,37 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
     <styles.Todo done={todo.done}>
       <styles.Content done={todo.done}>
         <styles.Title>{todo.title}</styles.Title>
-        <styles.Description>{todo.description}</styles.Description>
-      </styles.Content>
-      <styles.Footer>
+        {todo.description && <styles.Description>{todo.description}</styles.Description>}
         <styles.DateInfo>
-          <p>Last updated:</p>
+          <p>Updated:</p>
           <p>{formatDate(todo.updatedAt)}</p>
         </styles.DateInfo>
-        <styles.ButtonContainer>
-          <styles.ExpandButton
-            type="button"
-            onClick={handleEditClick}
-            title="edit"
-          >
-            <ExpandSvg />
-          </styles.ExpandButton>
-          <styles.DeleteButton
-            type="button"
-            onClick={handleDeleteClick}
-            title="delete"
-            disabled={buttonDisabled}
-          >
-            <DeleteSvg />
-          </styles.DeleteButton>
-          <styles.DoneButton
-            type="button"
-            onClick={handleDoneClick}
-            title="toggle completed"
-            disabled={buttonDisabled}
-          >
-            <DoneSvg />
-          </styles.DoneButton>
-        </styles.ButtonContainer>
-      </styles.Footer>
+      </styles.Content>
+      <styles.ButtonContainer>
+        <styles.ExpandButton
+          type="button"
+          onClick={handleEditClick}
+          title="edit"
+        >
+          <ExpandSvg />
+        </styles.ExpandButton>
+        <styles.DeleteButton
+          type="button"
+          onClick={handleDeleteClick}
+          title="delete"
+          disabled={buttonDisabled}
+        >
+          <DeleteSvg />
+        </styles.DeleteButton>
+        <styles.DoneButton
+          type="button"
+          onClick={handleDoneClick}
+          title="toggle completed"
+          disabled={buttonDisabled}
+        >
+          <DoneSvg />
+        </styles.DoneButton>
+      </styles.ButtonContainer>
     </styles.Todo>
   );
 };
