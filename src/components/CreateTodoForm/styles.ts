@@ -17,7 +17,6 @@ export const Form = styled.form`
 `;
 
 export const Title = styled(BaseH2)`
-  margin-bottom: 1.5rem;
   text-align: center;
 `;
 

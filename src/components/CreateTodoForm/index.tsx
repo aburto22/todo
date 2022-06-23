@@ -5,6 +5,7 @@ import { addTodoToList, createTodo } from '@lib/todos';
 import { useList } from '@hooks/swr';
 import { useUser } from '@auth0/nextjs-auth0';
 import { userNotAllowedToEdit } from '@lib/misc';
+import WithCollapse from '@components/WithCollapse';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -55,24 +56,25 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
   const buttonDisabled = userNotAllowedToEdit(list, user);
 
   return (
-    <styles.Form onSubmit={handleSubmit}>
-      <styles.Title>Add a new Todo</styles.Title>
-      <styles.Label htmlFor="title">
-        Title:
-        <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
-      </styles.Label>
-      <styles.Label htmlFor="description">
-        Description:
-        <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
-      </styles.Label>
-      <styles.SubmitButton
-        type="submit"
-        styleType="primary"
-        disabled={buttonDisabled}
-      >
-        Add
-      </styles.SubmitButton>
-    </styles.Form>
+    <WithCollapse Title={<styles.Title>Add new todo</styles.Title>}>
+      <styles.Form onSubmit={handleSubmit}>
+        <styles.Label htmlFor="title">
+          Title:
+          <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
+        </styles.Label>
+        <styles.Label htmlFor="description">
+          Description:
+          <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
+        </styles.Label>
+        <styles.SubmitButton
+          type="submit"
+          styleType="primary"
+          disabled={buttonDisabled}
+        >
+          Add
+        </styles.SubmitButton>
+      </styles.Form>
+    </WithCollapse>
   );
 };
 

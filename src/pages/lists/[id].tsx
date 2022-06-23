@@ -55,8 +55,6 @@ const List: NextPage = () => {
             </styles.InfoContainer>
             <styles.Section>
               <CreateTodoForm listId={listId} />
-            </styles.Section>
-            <styles.Section>
               <TodoList listId={listId} />
             </styles.Section>
           </>

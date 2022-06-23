@@ -21,7 +21,9 @@ export const Todo = styled.article<TodoProps>`
   `}
 
   :hover {
-    transform: scale(1.05);
+    ${({ done }) => !done && css`
+      transform: scale(1.05);
+    `}
   }
 `;
 
