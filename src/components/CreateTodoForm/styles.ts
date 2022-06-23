@@ -9,10 +9,11 @@ export const Form = styled.form`
   margin: 0 auto;
   box-shadow: ${boxShadow.insetMobile};
   padding: 1rem;
+  border-radius: 1rem;
 
   @media (min-width: ${dimensions.mobileBreak}) {
     padding: 2rem;
-  box-shadow: ${boxShadow.inset};
+    box-shadow: ${boxShadow.inset};
   }
 `;
 
