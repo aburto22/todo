@@ -8,7 +8,7 @@ export const Form = styled.form`
   max-width: 35rem;
   margin: 0 auto;
   box-shadow: ${boxShadow.insetMobile};
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 1rem;
 
   @media (min-width: ${dimensions.mobileBreak}) {

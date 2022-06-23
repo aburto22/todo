@@ -16,7 +16,11 @@ const Header = () => {
             </a>
           </Link>
         </styles.Title>
-        {user ? <a href="/api/auth/logout">Logout</a> : <a href="/api/auth/login">Login</a>}
+        {user ? (
+          <styles.LogoutButton href="/api/auth/logout" styleType="danger">Logout</styles.LogoutButton>
+        ) : (
+          <styles.LogoutButton href="/api/auth/login">Login</styles.LogoutButton>
+        )}
       </styles.Nav>
     </styles.Header>
   );

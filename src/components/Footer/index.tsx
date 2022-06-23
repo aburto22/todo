@@ -2,7 +2,7 @@ import * as styles from './styles';
 
 const Footer = () => (
   <styles.Footer>
-    I am the footer
+    Created by Alejandro Aburto Salazar
   </styles.Footer>
 );
 

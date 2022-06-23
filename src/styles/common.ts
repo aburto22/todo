@@ -71,6 +71,51 @@ export const BaseButton = styled.button<ButtonProps>`
   }
 `;
 
+export const BaseLinkButton = styled.a<ButtonProps>`
+  padding: 0.7rem 1.5rem;
+  border: 2px solid ${colors.blue};
+  transition: transform 300ms;
+  border-radius: 0.3rem;
+  display: block;
+
+  ${({ styleType }) => {
+    if (styleType === 'primary') {
+      return css`
+        background-color: ${colors.blue};
+        color: ${colors.white};
+      `;
+    }
+    if (styleType === 'success') {
+      return css`
+        background-color: ${colors.green};
+        color: ${colors.white};
+        border-color: ${colors.green};
+      `;
+    }
+    if (styleType === 'danger') {
+      return css`
+        background-color: ${colors.red};
+        color: ${colors.white};
+        border-color: ${colors.red};
+      `;
+    }
+    return css`
+      color: ${colors.blue};
+    `;
+  }}
+
+  ${({ disabled }) => disabled && css`
+    opacity: 0.7;
+    cursor: default;
+  `}
+
+  :hover {
+    ${({ disabled }) => !disabled && css`
+      transform: scale(1.08);
+    `}
+  }
+`;
+
 interface BaseSvgButtonProps {
   size?: 'large';
   disabled?: boolean;

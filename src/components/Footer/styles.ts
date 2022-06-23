@@ -5,5 +5,6 @@ export const Footer = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-top: 1px solid ${colors.gray};
+  font-size: 0.8rem;
+  color: ${colors.gray};
 `;
