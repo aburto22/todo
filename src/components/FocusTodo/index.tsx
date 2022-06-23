@@ -67,6 +67,7 @@ const FocusTodo = ({ todoId, setTodoId, listId }: FocusTodoProps) => {
           title={todo.title}
           description={todo.description}
           setIsEditing={setIsEditing}
+          listId={listId}
         />
       )}
     </styles.Container>

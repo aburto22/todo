@@ -3,8 +3,8 @@ import { formatDate } from '@lib/dates';
 import { useList } from '@hooks/swr';
 import { removeTodoFromList, updateTodoInList, toggleTodo } from '@lib/todos';
 import { updateListFetcher } from '@lib/listFetchers';
-import { DeleteSvg, EditSvg, DoneSvg } from '@components/Svg';
-import { canUserEdit } from '@lib/misc';
+import { DeleteSvg, ExpandSvg, DoneSvg } from '@components/Svg';
+import { userNotAllowedToEdit } from '@lib/misc';
 import { useUser } from '@auth0/nextjs-auth0';
 import * as styles from './styles';
 
@@ -53,6 +53,8 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
     mutate(updateListFetcher(updatedList), options);
   };
 
+  const buttonDisabled = userNotAllowedToEdit(list, user);
+
   return (
     <styles.Todo done={todo.done}>
       <styles.Content done={todo.done}>
@@ -65,19 +67,18 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
           <p>{formatDate(todo.updatedAt)}</p>
         </styles.DateInfo>
         <styles.ButtonContainer>
-          <styles.EditButton
+          <styles.ExpandButton
             type="button"
             onClick={handleEditClick}
             title="edit"
-            disabled={!canUserEdit(list, user)}
           >
-            <EditSvg />
-          </styles.EditButton>
+            <ExpandSvg />
+          </styles.ExpandButton>
           <styles.DeleteButton
             type="button"
             onClick={handleDeleteClick}
             title="delete"
-            disabled={!canUserEdit(list, user)}
+            disabled={buttonDisabled}
           >
             <DeleteSvg />
           </styles.DeleteButton>
@@ -85,7 +86,7 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
             type="button"
             onClick={handleDoneClick}
             title="toggle completed"
-            disabled={!canUserEdit(list, user)}
+            disabled={buttonDisabled}
           >
             <DoneSvg />
           </styles.DoneButton>

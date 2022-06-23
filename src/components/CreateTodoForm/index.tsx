@@ -3,7 +3,7 @@ import { updateListFetcher } from '@lib/listFetchers';
 import { addTodoToList, createTodo } from '@lib/todos';
 import { useList } from '@hooks/swr';
 import { useUser } from '@auth0/nextjs-auth0';
-import { canUserEdit } from '@lib/misc';
+import { userNotAllowedToEdit } from '@lib/misc';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -46,6 +46,8 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
     setDescription('');
   };
 
+  const buttonDisabled = userNotAllowedToEdit(list, user);
+
   return (
     <styles.Form onSubmit={handleSubmit}>
       <styles.Title>Add a new Todo</styles.Title>
@@ -60,7 +62,7 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
       <styles.SubmitButton
         type="submit"
         styleType="primary"
-        disabled={!canUserEdit(list, user)}
+        disabled={buttonDisabled}
       >
         Add
       </styles.SubmitButton>

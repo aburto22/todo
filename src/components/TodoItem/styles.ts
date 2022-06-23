@@ -78,7 +78,7 @@ export const DoneButton = styled(BaseSvgButton)`
 
 `;
 
-export const EditButton = styled(BaseSvgButton)`
+export const ExpandButton = styled(BaseSvgButton)`
 
 `;
 
