@@ -19,7 +19,7 @@ const WithCollapse = ({ Title, children, defaultOpen = false }: WithCollapseProp
     }
 
     setHeight(contentRef.current.scrollHeight);
-  }, []);
+  }, [children]);
 
   return (
     <styles.Container isShown={isShown}>

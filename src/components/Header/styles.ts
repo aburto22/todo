@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { colors, dimensions } from '@styles/cssVariables';
+import { boxShadow, dimensions } from '@styles/cssVariables';
 import { BaseLinkButton } from '@styles/common';
 
 export const Header = styled.header`
-  border-bottom: 1px solid ${colors.gray};
   padding: 0 1rem;
+  box-shadow: ${boxShadow.light};
 `;
 
 export const Nav = styled.nav`
@@ -21,7 +21,7 @@ export const Title = styled.h2`
   margin-right: auto;
 
   @media (min-width: ${dimensions.mobileBreak}) {
-    font-size: 2rem;
+    font-size: 1.7rem;
   }
 `;
 
