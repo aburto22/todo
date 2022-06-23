@@ -76,6 +76,29 @@ export const saveNewListFetcher = async (list: ITodoList): Promise<ITodoList> =>
   return res.saveNewList;
 };
 
+export const updateListSummaryFetcher = async (updatedList: ITodoList): Promise<ITodoList> => {
+  const query = gql`
+    mutation updateListSummary($updatedList: inputListSummary!) {
+      updateListSummary(updatedList: $updatedList) {
+        id
+        name
+        ownerId
+        isFreezed
+        createdAt
+        updatedAt
+        todos {
+          id
+        }
+      }
+    }
+  `;
+
+  const variables = { updatedList };
+
+  const res = await fetcher(query, variables);
+  return res.updateListSummary;
+};
+
 export const updateListFetcher = async (updatedList: ITodoList): Promise<ITodoList> => {
   const query = gql`
     mutation updateList($updatedList: inputList!) {

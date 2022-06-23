@@ -8,6 +8,9 @@ import Spinner from '@components/Spinner';
 import { useList } from '@hooks/swr';
 import TodoList from '@components/TodoList';
 import { SnowSvg } from '@components/Svg';
+import { toggleList } from '@lib/lists';
+import { updateListFetcher } from '@lib/listFetchers';
+import { triggerPusher } from '@lib/pusher';
 import * as styles from '@styles/home';
 
 const List: NextPage = () => {
@@ -15,6 +18,10 @@ const List: NextPage = () => {
   const { id } = router.query;
   const listId = id?.toString() || '';
   const { list, error, mutate } = useList(listId);
+
+  if (error) {
+    console.error(error);
+  }
 
   useEffect(() => {
     const pusherKey = process.env.NEXT_PUBLIC_PUSHER_KEY || '';
@@ -36,9 +43,24 @@ const List: NextPage = () => {
     };
   }, [listId, mutate]);
 
-  if (error) {
-    console.error(error);
-  }
+  const handleFreezeClick = () => {
+    if (!list) {
+      return;
+    }
+
+    const updatedList = toggleList(list);
+
+    const options = {
+      optimisticData: updatedList,
+      rollbackOnError: true,
+    };
+
+    mutate(async () => {
+      const savedList = await updateListFetcher(updatedList);
+      await triggerPusher(list.id);
+      return savedList;
+    }, options);
+  };
 
   return (
     <>
@@ -53,7 +75,11 @@ const List: NextPage = () => {
             <styles.Title>{`List: ${list.name}`}</styles.Title>
             <styles.InfoContainer>
               <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
-              <styles.FreezeButton size="large" active={list.isFreezed}>
+              <styles.FreezeButton
+                size="large"
+                active={list.isFreezed}
+                onClick={handleFreezeClick}
+              >
                 <SnowSvg />
               </styles.FreezeButton>
             </styles.InfoContainer>

@@ -3,7 +3,7 @@ import { ITodoList } from '@localTypes/client';
 import { DeleteSvg, SnowSvg } from '@components/Svg';
 import { useUserLists } from '@hooks/swr';
 import { removeListFromArray, toggleList, updateListInArray } from '@lib/lists';
-import { deleteListFetcher, updateListFetcher } from '@lib/listFetchers';
+import { deleteListFetcher, updateListSummaryFetcher } from '@lib/listFetchers';
 import * as styles from './styles';
 
 interface ListPreviewProps {
@@ -46,7 +46,7 @@ const ListPreview = ({ list, userId }: ListPreviewProps) => {
     };
 
     mutate(async () => {
-      const savedList = await updateListFetcher(updatedList);
+      const savedList = await updateListSummaryFetcher(updatedList);
       return lists.map((l) => (l.id === savedList.id ? savedList : l));
     }, options);
   };

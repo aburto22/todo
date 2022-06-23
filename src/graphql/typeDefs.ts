@@ -46,6 +46,20 @@ const typeDefs = gql`
     updatedAt: String
   }
 
+  input inputTodoSummary {
+    id: String
+  }
+
+  input inputListSummary {
+    id: String
+    name: String
+    ownerId: String
+    isFreezed: Boolean
+    createdAt: String
+    updatedAt: String
+    todos: [inputTodoSummary]
+  }
+
   type Query {
     getUserByEmail(email: String!): User
     getUserLists(ownerId: String!): [List]!
@@ -56,6 +70,7 @@ const typeDefs = gql`
     createUser(email: String!, name: String!): User!
     saveNewList(list: inputList): List!
     updateList(updatedList: inputList): List
+    updateListSummary(updatedList: inputListSummary): List
     deleteList(listId: String): List
   }
 `;

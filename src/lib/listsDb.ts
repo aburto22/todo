@@ -38,6 +38,34 @@ export const updateList = async (updatedList: ITodoList): Promise<ITodoListDb> =
   return savedList;
 };
 
+export const updateListSummary = async (updatedList: ITodoList): Promise<ITodoListDb> => {
+  await dbConnect();
+
+  const options = {
+    returnDocument: 'after',
+  };
+
+  const list = await List.findOne<ITodoListDb>({ id: updatedList.id }).exec();
+
+  if (!list) {
+    throw new Error('List not found');
+  }
+
+  const newList = {
+    ...updatedList,
+    todos: list.todos,
+  };
+
+  const savedList = await List
+    .findOneAndReplace<ITodoListDb>({ id: updatedList.id }, newList, options).exec();
+
+  if (!savedList) {
+    throw new Error('List not found');
+  }
+
+  return savedList;
+};
+
 export const deleteList = async (listId: string): Promise<ITodoListDb> => {
   await dbConnect();
 
