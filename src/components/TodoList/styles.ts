@@ -3,8 +3,6 @@ import { BaseH2 } from '@styles/common';
 
 export const Subheading = styled(BaseH2)`
   text-align: center;
-  margin-bottom: 1rem;
-  padding: 0 1rem;
 `;
 
 export const List = styled.ul`

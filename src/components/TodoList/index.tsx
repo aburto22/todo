@@ -2,6 +2,7 @@ import { useState } from 'react';
 import TodoItem from '@components/TodoItem';
 import { useList } from '@hooks/swr';
 import FocusTodo from '@components/FocusTodo';
+import WithCollapse from '@components/WithCollapse';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -23,20 +24,16 @@ const TodoList = ({ listId }: TodoListProps) => {
     <>
       <FocusTodo todoId={focusTodoId} setTodoId={setFocusTodoId} listId={listId} />
       {pendingTodos.length > 0 && (
-        <>
-          <styles.Subheading>{`Pending (${pendingTodos.length})`}</styles.Subheading>
-          <styles.List>
-            {pendingTodos.map((todo) => (
-              <li key={todo.id}>
-                <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
-              </li>
-            ))}
-          </styles.List>
-        </>
+        <styles.List>
+          {pendingTodos.map((todo) => (
+            <li key={todo.id}>
+              <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
+            </li>
+          ))}
+        </styles.List>
       )}
       {doneTodos.length > 0 && (
-        <>
-          <styles.Subheading>Completed</styles.Subheading>
+        <WithCollapse Title={<styles.Subheading>{`Completed (${doneTodos.length})`}</styles.Subheading>}>
           <styles.List>
             {doneTodos.map((todo) => (
               <li key={todo.id}>
@@ -44,7 +41,7 @@ const TodoList = ({ listId }: TodoListProps) => {
               </li>
             ))}
           </styles.List>
-        </>
+        </WithCollapse>
       )}
     </>
   );
