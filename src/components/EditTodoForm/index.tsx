@@ -60,15 +60,18 @@ const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
         onChange={(e) => setTitleInput(e.target.value)}
         required
       />
-      <styles.CostInput
-        type="number"
-        value={costInput}
-        onChange={(e) => setCostInput(Number(e.target.value))}
-        min={0}
-        max={2000000000}
-        step={1}
-        required
-      />
+      <styles.CostLabel>
+        $
+        <styles.CostInput
+          type="number"
+          value={costInput}
+          onChange={(e) => setCostInput(Number(e.target.value))}
+          min={0}
+          max={2000000000}
+          step={1}
+          required
+        />
+      </styles.CostLabel>
       <styles.DescriptionInput
         value={descriptionInput}
         onChange={(e) => setDescriptionInput(e.target.value)}

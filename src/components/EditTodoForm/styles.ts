@@ -36,6 +36,13 @@ export const TitleInput = styled(BaseTextarea)`
   }
 `;
 
+export const CostLabel = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding-left: 0.5rem;
+`;
+
 export const CostInput = styled(BaseInput)`
   width: 100%;
   height: 100%;
