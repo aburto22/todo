@@ -43,7 +43,7 @@ export const Content = styled.button<ContentProps>`
   `}
 
   @media (min-width: ${dimensions.mobileBreak}) {
-    gap: 0.3rem;
+    gap: 0.2rem;
   }
 `;
 
