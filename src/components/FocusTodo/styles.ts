@@ -1,6 +1,6 @@
 import { colors, dimensions } from '@styles/cssVariables';
 import styled from 'styled-components';
-import { BaseSvgButton, BaseButton } from '@styles/common';
+import { BaseSvgButton } from '@styles/common';
 
 export const Container = styled.div`
   position: fixed;
@@ -25,15 +25,4 @@ export const CloseButton = styled(BaseSvgButton)`
   @media (min-width: ${dimensions.mobileBreak}) {
     right: 2rem;
   }
-`;
-
-export const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-`;
-
-export const Button = styled(BaseButton)`
-
 `;
