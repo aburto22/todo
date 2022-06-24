@@ -13,3 +13,13 @@ export const isUserOwner = (
 
 export const sortList = <T extends ITodo | ITodoList>(array: T[]) => array
   .sort((a, b) => (new Date(b.updatedAt)).getTime() - (new Date(a.updatedAt)).getTime());
+
+export const formatCost = (cost: number): string => `$${cost.toString()
+  .split('')
+  .reverse()
+  .join('')
+  .replace(/\d{3}/g, '$&,')
+  .replace(/,$/, '')
+  .split('')
+  .reverse()
+  .join('')}`;

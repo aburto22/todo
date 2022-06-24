@@ -13,7 +13,7 @@ import { updateListFetcher } from '@lib/listFetchers';
 import { triggerPusher } from '@lib/pusher';
 import * as styles from '@styles/home';
 import { useUser } from '@auth0/nextjs-auth0';
-import { isUserOwner, userNotAllowedToEdit } from '@lib/misc';
+import { isUserOwner, userNotAllowedToEdit, formatCost } from '@lib/misc';
 import TooltipIcon from '@components/TooltipIcon';
 
 const List: NextPage = () => {
@@ -66,6 +66,8 @@ const List: NextPage = () => {
     }, options);
   };
 
+  const listCost = list?.todos.reduce((sum, todo) => sum + todo.cost, 0) || 0;
+
   return (
     <>
       <Head>
@@ -90,7 +92,8 @@ const List: NextPage = () => {
               )}
             </styles.Title>
             <styles.InfoContainer>
-              <styles.Info>{`status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
+              {listCost && <styles.Info>{`Total cost: ${formatCost(listCost)}`}</styles.Info>}
+              <styles.Info>{`Status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
               {isUserOwner(list, user) && (
                 <styles.FreezeButton
                   size="large"

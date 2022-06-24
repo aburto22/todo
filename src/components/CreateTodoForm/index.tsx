@@ -15,6 +15,7 @@ interface TodoListProps {
 const CreateTodoForm = ({ listId }: TodoListProps) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [cost, setCost] = useState(0);
   const { list, mutate } = useList(listId);
   const { user } = useUser();
 
@@ -26,6 +27,10 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
     setDescription(e.target.value);
   };
 
+  const handleCostChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCost(Number(e.target.value));
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -33,7 +38,7 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
       return;
     }
 
-    const newTodo = createTodo(title.trim(), description.trim());
+    const newTodo = createTodo(title.trim(), description.trim(), cost);
     const updatedList = addTodoToList(list, newTodo);
 
     const options = {
@@ -51,6 +56,7 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
 
     setTitle('');
     setDescription('');
+    setCost(0);
   };
 
   const buttonDisabled = userNotAllowedToEdit(list, user);
@@ -63,11 +69,33 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
       <styles.Form onSubmit={handleSubmit}>
         <styles.Label htmlFor="title">
           Title:
-          <styles.Input type="text" name="title" value={title} onChange={handleTitleChange} required />
+          <styles.Input
+            type="text"
+            name="title"
+            value={title}
+            onChange={handleTitleChange}
+            required
+          />
+        </styles.Label>
+        <styles.Label htmlFor="title">
+          Cost:
+          <styles.Input
+            type="number"
+            name="cost"
+            value={cost}
+            onChange={handleCostChange}
+            min={0}
+            max={2000000000}
+            required
+          />
         </styles.Label>
         <styles.Label htmlFor="description">
           Description:
-          <styles.Textarea name="description" value={description} onChange={handleDescriptionChange} />
+          <styles.Textarea
+            name="description"
+            value={description}
+            onChange={handleDescriptionChange}
+          />
         </styles.Label>
         <styles.SubmitButton
           type="submit"

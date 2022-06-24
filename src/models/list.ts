@@ -49,6 +49,7 @@ const listSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      cost: Number,
     }],
   },
 });

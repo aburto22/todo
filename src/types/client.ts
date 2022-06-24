@@ -5,6 +5,7 @@ export interface ITodo {
   createdAt: string;
   updatedAt: string;
   id: string;
+  cost: number;
 }
 
 export interface ITodoList {

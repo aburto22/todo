@@ -15,6 +15,7 @@ const typeDefs = gql`
     done: Boolean
     createdAt: String
     updatedAt: String
+    cost: Int
   }
 
   type List {
@@ -34,6 +35,7 @@ const typeDefs = gql`
     done: Boolean
     createdAt: String
     updatedAt: String
+    cost: Int
   }
 
   input inputList {

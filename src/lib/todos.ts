@@ -1,13 +1,14 @@
 import { v4 as uuidv4 } from 'uuid';
 import type { ITodoList, ITodo } from '@localTypes/client';
 
-export const createTodo = (title: string, description: string): ITodo => ({
+export const createTodo = (title: string, description: string, cost: number): ITodo => ({
   id: uuidv4(),
   title,
   description,
   createdAt: Date(),
   updatedAt: Date(),
   done: false,
+  cost,
 });
 
 export const toggleTodo = (todo: ITodo): ITodo => ({

@@ -19,6 +19,7 @@ export const getListFetcher = async (listId: string): Promise<ITodoList | null> 
           done
           createdAt
           updatedAt
+          cost
         }
       }
     }
@@ -42,6 +43,7 @@ export const getUserListsFetcher = async (ownerId: string): Promise<ITodoList[]>
         updatedAt
         todos {
           id
+          cost
         }
       }
     }
@@ -65,6 +67,7 @@ export const saveNewListFetcher = async (list: ITodoList): Promise<ITodoList> =>
         updatedAt
         todos {
           id
+          cost
         }
       }
     }
@@ -88,6 +91,7 @@ export const updateListSummaryFetcher = async (updatedList: ITodoList): Promise<
         updatedAt
         todos {
           id
+          cost
         }
       }
     }
@@ -116,6 +120,7 @@ export const updateListFetcher = async (updatedList: ITodoList): Promise<ITodoLi
           done
           createdAt
           updatedAt
+          cost
         }
       }
     }
@@ -144,6 +149,7 @@ export const deleteListFetcher = async (listId: string): Promise<ITodoList> => {
           done
           createdAt
           updatedAt
+          cost
         }
       }
     }

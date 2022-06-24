@@ -61,6 +61,21 @@ export const Title = styled(BaseH3)`
   }
 `;
 
+export const Cost = styled.p`
+  font-size: 0.6rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-weight: 700;
+  color: ${colors.black};
+  padding: 0.1rem;
+  max-width: 100%;
+
+  @media (min-width: ${dimensions.mobileBreak}) {
+    font-size: 0.8rem;
+  }
+`;
+
 export const Description = styled.p`
   font-size: 0.7rem;
   overflow: hidden;

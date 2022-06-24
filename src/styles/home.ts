@@ -33,6 +33,10 @@ export const Section = styled.section`
 export const InfoContainer = styled.div`
   width: max-content;
   margin: 0 auto 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  align-items: center;
 `;
 
 export const Info = styled(BaseH6)`

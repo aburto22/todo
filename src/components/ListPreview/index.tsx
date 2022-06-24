@@ -4,6 +4,7 @@ import { DeleteSvg, SnowSvg } from '@components/Svg';
 import { useUserLists } from '@hooks/swr';
 import { removeListFromArray, toggleList, updateListInArray } from '@lib/lists';
 import { deleteListFetcher, updateListSummaryFetcher } from '@lib/listFetchers';
+import { formatCost } from '@lib/misc';
 import * as styles from './styles';
 
 interface ListPreviewProps {
@@ -51,10 +52,15 @@ const ListPreview = ({ list, userId }: ListPreviewProps) => {
     }, options);
   };
 
+  const listCost = list.todos.reduce((sum, todo) => sum + todo.cost, 0);
+
   return (
     <styles.Container>
       <Link href={`/lists/${list.id}`} passHref>
-        <styles.Link href="dummy">{list.name}</styles.Link>
+        <styles.Link href="dummy">
+          <styles.ListName>{list.name}</styles.ListName>
+          {listCost > 0 && <styles.ListCost>{formatCost(listCost)}</styles.ListCost>}
+        </styles.Link>
       </Link>
       <styles.Side>
         <styles.FreezeButton

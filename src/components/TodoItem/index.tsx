@@ -4,7 +4,7 @@ import { useList } from '@hooks/swr';
 import { removeTodoFromList, updateTodoInList, toggleTodo } from '@lib/todos';
 import { updateListFetcher } from '@lib/listFetchers';
 import { DeleteSvg, DoneSvg } from '@components/Svg';
-import { userNotAllowedToEdit } from '@lib/misc';
+import { userNotAllowedToEdit, formatCost } from '@lib/misc';
 import { useUser } from '@auth0/nextjs-auth0';
 import { triggerPusher } from '@lib/pusher';
 import * as styles from './styles';
@@ -72,6 +72,7 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
         onClick={handleExpandClick}
       >
         <styles.Title>{todo.title}</styles.Title>
+        {todo.cost && <styles.Cost>{formatCost(todo.cost)}</styles.Cost>}
         {todo.description && <styles.Description>{todo.description}</styles.Description>}
         <styles.DateInfo>
           <p>Updated:</p>
