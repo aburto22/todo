@@ -3,6 +3,7 @@ import ListPreview from '@components/ListPreview';
 import { useUserLists } from '@hooks/swr';
 import MessageScreen from '@components/MessageScreen';
 import Spinner from '@components/Spinner';
+import { sortList } from '@lib/misc';
 import * as styles from './styles';
 
 const AllLists = () => {
@@ -20,7 +21,7 @@ const AllLists = () => {
 
   return (
     <styles.List>
-      {lists.map((list) => (
+      {sortList(lists).map((list) => (
         <li key={list.id}>
           <ListPreview list={list} userId={userId} />
         </li>

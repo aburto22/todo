@@ -3,6 +3,8 @@ import TodoItem from '@components/TodoItem';
 import { useList } from '@hooks/swr';
 import FocusTodo from '@components/FocusTodo';
 import WithCollapse from '@components/WithCollapse';
+import { sortList } from '@lib/misc';
+import type { ITodo } from '@localTypes/client';
 import * as styles from './styles';
 
 interface TodoListProps {
@@ -25,7 +27,7 @@ const TodoList = ({ listId }: TodoListProps) => {
       <FocusTodo todoId={focusTodoId} setTodoId={setFocusTodoId} listId={listId} />
       {pendingTodos.length > 0 && (
         <styles.List>
-          {pendingTodos.map((todo) => (
+          {sortList<ITodo>(pendingTodos).map((todo) => (
             <styles.ListItem key={todo.id}>
               <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
             </styles.ListItem>
@@ -35,7 +37,7 @@ const TodoList = ({ listId }: TodoListProps) => {
       {doneTodos.length > 0 && (
         <WithCollapse Title={<styles.Subheading>{`Completed (${doneTodos.length})`}</styles.Subheading>}>
           <styles.List>
-            {doneTodos.map((todo) => (
+            {sortList<ITodo>(doneTodos).map((todo) => (
               <styles.ListItem key={todo.id}>
                 <TodoItem todo={todo} listId={listId} setFocusTodoId={setFocusTodoId} />
               </styles.ListItem>

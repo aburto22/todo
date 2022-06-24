@@ -1,4 +1,4 @@
-import type { ITodoList } from '@localTypes/client';
+import type { ITodoList, ITodo } from '@localTypes/client';
 import type { UserProfile } from '@auth0/nextjs-auth0';
 
 export const userNotAllowedToEdit = (
@@ -10,3 +10,6 @@ export const isUserOwner = (
   list: ITodoList | null | undefined,
   user: UserProfile | undefined,
 ): boolean => Boolean(list && user && user.sub === list.ownerId);
+
+export const sortList = <T extends ITodo | ITodoList>(array: T[]) => array
+  .sort((a, b) => (new Date(b.updatedAt)).getTime() - (new Date(a.updatedAt)).getTime());
