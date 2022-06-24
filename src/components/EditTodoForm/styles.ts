@@ -1,6 +1,6 @@
 import { colors, dimensions } from '@styles/cssVariables';
 import styled from 'styled-components';
-import { BaseButton, BaseTextarea } from '@styles/common';
+import { BaseButton, BaseInput, BaseTextarea } from '@styles/common';
 
 export const Form = styled.form`
   height: 30rem;
@@ -8,13 +8,13 @@ export const Form = styled.form`
   max-width: 100%;
   width: 25rem;
   display: grid;
-  grid-template-rows: 5rem minmax(0, 1fr) 3.5rem;
+  grid-template-rows: 5rem 2rem minmax(0, 1fr) 3.5rem;
   gap: 0.5rem;
   background-color: ${colors.white};
   padding: 0.5rem 0.5rem 1rem;
 
   @media (min-width: ${dimensions.mobileBreak}) {
-    grid-template-rows: 8rem minmax(0, 1fr) 3.5rem;
+    grid-template-rows: 8rem 2rem minmax(0, 1fr) 3.5rem;
     width: 30rem;
     height: 45rem;
     padding: 1.5rem 1.5rem 2rem;
@@ -33,6 +33,19 @@ export const TitleInput = styled(BaseTextarea)`
   @media (min-width: ${dimensions.mobileBreak}) {
     font-size: 1.2rem;
     line-height: 1.2rem;
+  }
+`;
+
+export const CostInput = styled(BaseInput)`
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+
+  @media (min-width: ${dimensions.mobileBreak}) {
+    font-size: 1rem;
+    line-height: 1rem;
   }
 `;
 

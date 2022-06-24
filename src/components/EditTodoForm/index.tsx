@@ -14,6 +14,7 @@ interface EditTodoFormProps {
 
 const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
   const [titleInput, setTitleInput] = useState(todo.title);
+  const [costInput, setCostInput] = useState(todo.cost);
   const [descriptionInput, setDescriptionInput] = useState(todo.description);
   const { list, mutate } = useList(listId);
 
@@ -27,6 +28,7 @@ const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
     const updatedData = {
       title: titleInput.trim(),
       description: descriptionInput.trim(),
+      cost: costInput,
     };
     const updatedTodo = updateTodo(todo, updatedData);
     const updatedList = updateTodoInList(list, updatedTodo);
@@ -56,6 +58,15 @@ const EditTodoForm = ({ todo, setIsEditing, listId }: EditTodoFormProps) => {
       <styles.TitleInput
         value={titleInput}
         onChange={(e) => setTitleInput(e.target.value)}
+        required
+      />
+      <styles.CostInput
+        type="number"
+        value={costInput}
+        onChange={(e) => setCostInput(Number(e.target.value))}
+        min={0}
+        max={2000000000}
+        step={1}
         required
       />
       <styles.DescriptionInput

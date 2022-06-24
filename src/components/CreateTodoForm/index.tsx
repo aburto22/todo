@@ -86,6 +86,7 @@ const CreateTodoForm = ({ listId }: TodoListProps) => {
             onChange={handleCostChange}
             min={0}
             max={2000000000}
+            step={1}
             required
           />
         </styles.Label>

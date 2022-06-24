@@ -1,18 +1,16 @@
 import { useUser } from '@auth0/nextjs-auth0';
 import { useList } from '@hooks/swr';
-import { userNotAllowedToEdit } from '@lib/misc';
+import { userNotAllowedToEdit, formatCost } from '@lib/misc';
+import { ITodo } from '@localTypes/client';
 import * as styles from './styles';
 
 interface FocusTodoContentProps {
-  title: string;
-  description: string;
+  todo: ITodo;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   listId: string;
 }
 
-const FocusTodoContent = ({
-  title, description, setIsEditing, listId,
-}: FocusTodoContentProps) => {
+const FocusTodoContent = ({ todo, setIsEditing, listId }: FocusTodoContentProps) => {
   const { user } = useUser();
   const { list } = useList(listId);
 
@@ -20,8 +18,9 @@ const FocusTodoContent = ({
 
   return (
     <styles.Todo>
-      <styles.Title>{title}</styles.Title>
-      <styles.Description>{description}</styles.Description>
+      <styles.Title>{todo.title}</styles.Title>
+      <styles.Cost>{formatCost(todo.cost)}</styles.Cost>
+      <styles.Description>{todo.description}</styles.Description>
       <styles.ButtonContainer>
         <styles.Button
           type="button"

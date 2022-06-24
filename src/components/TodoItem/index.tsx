@@ -72,7 +72,7 @@ const TodoItem = ({ todo, listId, setFocusTodoId }: TodoItemProps) => {
         onClick={handleExpandClick}
       >
         <styles.Title>{todo.title}</styles.Title>
-        {todo.cost && <styles.Cost>{formatCost(todo.cost)}</styles.Cost>}
+        {todo.cost > 0 && <styles.Cost>{formatCost(todo.cost)}</styles.Cost>}
         {todo.description && <styles.Description>{todo.description}</styles.Description>}
         <styles.DateInfo>
           <p>Updated:</p>
