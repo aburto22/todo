@@ -36,14 +36,14 @@ export const Content = styled.button<ContentProps>`
   flex-direction: column;
   overflow: hidden;
   justify-content: flex-start;
-  gap: 0.3rem;
+  gap: 0.1rem;
 
   ${({ done }) => done && css`
     text-decoration: line-through;
   `}
 
   @media (min-width: ${dimensions.mobileBreak}) {
-    gap: 0.5rem;
+    gap: 0.3rem;
   }
 `;
 
@@ -53,6 +53,8 @@ export const Title = styled(BaseH3)`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  padding: 0.1rem;
+  max-width: 100%;
 
   @media (min-width: ${dimensions.mobileBreak}) {
     font-size: 1.2rem;
@@ -65,6 +67,8 @@ export const Description = styled.p`
   white-space: nowrap;
   text-overflow: ellipsis;
   font-weight: 500;
+  padding: 0.1rem;
+  max-width: 100%;
 
   @media (min-width: ${dimensions.mobileBreak}) {
     font-size: 0.9rem;
