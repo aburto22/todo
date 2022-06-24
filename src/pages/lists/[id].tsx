@@ -92,7 +92,7 @@ const List: NextPage = () => {
               )}
             </styles.Title>
             <styles.InfoContainer>
-              {listCost && <styles.Info>{`Total cost: ${formatCost(listCost)}`}</styles.Info>}
+              {listCost > 0 && <styles.Info>{`Total cost: ${formatCost(listCost)}`}</styles.Info>}
               <styles.Info>{`Status: ${list.isFreezed ? 'freezed' : 'un-freezed'}`}</styles.Info>
               {isUserOwner(list, user) && (
                 <styles.FreezeButton
